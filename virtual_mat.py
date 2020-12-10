@@ -34,4 +34,5 @@ def u(x):
     turtle.pu()
 
 create_base_mat(8)
-print("test")
+turtle.shape("square")
+turtle.done()
