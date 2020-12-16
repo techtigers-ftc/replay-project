@@ -1,7 +1,7 @@
 try:
     from os import system
 except:
-    from .dummy import system
+    from ./magik import system
 
 def get_color(rgb):
     """ This function will take a rgb tuple, and convert it into a color

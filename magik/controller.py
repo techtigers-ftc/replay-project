@@ -1,10 +1,12 @@
 #! /usr/bin/python3
 import time 
-from .ascii_adaptor import AsciiAdaptor
-from .turtle_adaptor import TurtleAdaptor
-from .np_adaptor import NeoPixelAdaptor
 from .display import Display
 from .game import Game
+try:
+    from .ascii_adaptor import AsciiAdaptor
+    from .turtle_adaptor import TurtleAdaptor
+except:
+    from .np_adaptor import NeoPixelAdaptor
 
 
 class Controller:
