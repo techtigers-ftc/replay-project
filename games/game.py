@@ -1,6 +1,5 @@
 # This is an example of a game program. You will need a setup and a loop function.
 import time 
-from magik import Controller
 
 class Game:
     def __init__(self):
@@ -28,7 +27,7 @@ class Game:
             in the controller
         :type delta: Number
         """
-        display.set_pixel(self.counter, self.counter, (0,1,0))
+        display.set_pixel(self.counter, self.counter, (0,0,1))
         diff = time.time() - self.clock
         if diff > 2:
             self.counter += 1
@@ -36,7 +35,3 @@ class Game:
         if self.counter == display.width:
             self.counter = 0
             display.clear_screen()
-
-
-controller = Controller(game, 6, 6, "ascii")
-controller.start()

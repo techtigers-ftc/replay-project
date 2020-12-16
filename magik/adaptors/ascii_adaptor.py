@@ -1,8 +1,10 @@
+from ..utils.styles import Colors
 try:
     from os import system
 except:
-    from ./magik import system
+    from utils.system_shim import system
 
+colors = Colors()
 def get_color(rgb):
     """ This function will take a rgb tuple, and convert it into a color
 
@@ -11,13 +13,14 @@ def get_color(rgb):
     """
     (r, g, b) = rgb
     if r == 1:
-        return " R "
+        return "{} 0 {}".format(colors.COL_RED, colors.COL_NORMAL)
     elif g == 1:
-        return " G "
+        return "{} 0 {}".format(colors.COL_LIGHT_GREEN, colors.COL_NORMAL)
     elif b == 1:
-        return " B "
+        return "{} 0 {}".format(colors.COL_BLUE, colors.COL_NORMAL)
     else:
-        return " b "
+        return "{} 0 {}".format(colors.COL_BLACK, colors.COL_NORMAL)
+
 
 class AsciiAdaptor:
     def __init__(self, display):
