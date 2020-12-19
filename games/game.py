@@ -27,7 +27,7 @@ class Game:
             in the controller
         :type delta: Number
         """
-        display.set_pixel(self.counter, self.counter, (0,0,1))
+        display.set_pixel(self.counter, self.counter, (0,1,0))
         diff = time.time() - self.clock
         if diff > 2:
             self.counter += 1

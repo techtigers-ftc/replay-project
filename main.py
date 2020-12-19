@@ -4,7 +4,7 @@ from magik import Controller
 from games.game import Game
 
 game = Game()
-display = Display(10, 10)
+display = Display(3, 3)
 adaptor = AsciiAdaptor(display)
 controller = Controller(game, display, adaptor)
 controller.start()
