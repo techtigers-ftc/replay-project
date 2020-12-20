@@ -12,7 +12,7 @@ def get_color(rgb):
     :type rgb: Tuple
     """
     (r, g, b) = rgb
-    if r == 1:
+    if r >= 1:
         return "{} 0 {}".format(colors.COL_RED, colors.COL_NORMAL)
     elif g == 1:
         return "{} 0 {}".format(colors.COL_LIGHT_GREEN, colors.COL_NORMAL)
