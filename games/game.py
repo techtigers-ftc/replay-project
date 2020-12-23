@@ -14,10 +14,10 @@ class Game:
         :param display: Instance of the display class used throughout the game
         :type display: Display
         """
-        display.clear_screen()
         display.set_pixel(0,0,(1,0,0))
+        display.clear_screen()
 
-    def loop(self, display, delta):
+    def loop1(self, display, delta, inputs):
         """ Loop function will loop throughout the controller program forever. It can 
         be used as the basis for your game
 
@@ -35,3 +35,8 @@ class Game:
         if self.counter == display.width:
             self.counter = 0
             display.clear_screen()
+
+    def loop(self, display, delta, inputs):
+        for x in range(0, inputs.x_length):
+            for y in range(0, inputs.y_length):
+                display.set_pixel(x, y, (inputs.input_value(x, y), 0, 0))
