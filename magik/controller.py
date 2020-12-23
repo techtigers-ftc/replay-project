@@ -1,7 +1,9 @@
 """ Module for the Controller class """
-#! /usr/bin/python3
 import time
 from .display_adaptor import DisplayAdaptor
+from .input_adaptor import InputAdaptor
+from .game import Game
+
 
 class Controller:
     """ Controlls all of the elements that make up the game. Allows user to
@@ -9,63 +11,89 @@ class Controller:
     game."""
 
     def __init__(self):
-        """ Creates a new instance of controller class. Controller needs to be 
+        """ Creates a new instance of controller class. Controller needs to be
         configured before it can be run
         """
 
         self._display_adaptor = None
         self._game = None
-        self._display = None
-        self._input = None
         self. _input_adaptor = None
+        self._frame_delay = None
 
-    def set_display(self, adaptor):
-        """Sets the adaptor for the game
+    def set_display(self, display_adaptor):
+        """ Sets the adaptor for the game
 
-        :param adaptor: instance of adaptor to render the game
-        :type adaptor: DisplayAdapter
+        :param display_adaptor: Instance of adaptor to render the game
+        :type display_adaptor: DisplayAdapter
         """
-        if not isinstance(adaptor, DisplayAdaptor):
-            raise TypeError("Invalid adaptor (arg #1)")
 
-        self._display_adaptor = adaptor
+        if not isinstance(display_adaptor, DisplayAdaptor):
+            raise TypeError("Invalid display adaptor")
+
+        self._display_adaptor = display_adaptor
 
     def set_game(self, game):
-        """Sets the game logic
+        """ Sets the game logic
 
-        :param game: instance of the game logic
-        :type Game: GameAdaptor 
+        :param game: Instance of the game logic
+        :type Game: GameAdaptor
         """
-        if not isinstance(game, GameAdaptor):
+
+        if not isinstance(game, Game):
             raise TypeError("Invalid game")
         self._game = game
 
-    def set_input(self, inputs):
+    def set_input(self, input_adaptor):
         """ Sets the input for the game
 
-        :param inputs: instance of input adapter to take unputs
-        :type Input:InputAdaptor
-
+        :param inputs: Instance of input adapter
+        :type Input: InputAdaptor
         """
-        if not isinstance(inputs, InputAdaptor) is None:
-            raise ValueError("give valid inputs class")
-        self._input = inputs
+
+        if not isinstance(input_adaptor, InputAdaptor) is None:
+            raise TypeError("Invalid input adaptor")
+        self._input_adaptor = input_adaptor
+
+    def set_frame_rate(self, frame_rate):
+        """ Sets the frame rate for the game
+
+        :param frame_rate: The rate the frame resets at
+        :type Input: Number
+        """
+
+        if not frame_rate > 0:
+            raise ValueError("Invalid frame rate")
+        self._frame_delay = 1/frame_rate
 
     def start(self):
-        """ runs the setup then loop in a forever loop and keeps track of time
+        """ Sets up and starts the game loop
         """
-        self._game.setup(self._display)
-        clock = time.time()
+        if not isinstance(self._display_adaptor, DisplayAdaptor):
+            raise Exception("Display adaptor has not been set")
 
-        while True:
-            time.sleep(1)
+        if not isinstance(self._game, Game):
+            raise Exception("Game has not been set")
+
+        if not isinstance(self._input_adaptor, InputAdaptor) is None:
+            raise Exception("Input adaptor has not been set")
+
+        if not self._frame_delay >= 0:
+            raise Exception("Frame rate has not been set")
+
+        # Setting up the game, inputs and outputs
+        self._game.setup()
+        display_data = self._game.create_display()
+        input_data = self._game.create_input()
+
+        clock = time.time()
+        running = True
+        while running:
             delta = time.time() - clock
             clock = time.time()
+            time.sleep(max(self._frame_delay - delta, 0))
+
             self._input_adaptor.read_raw_input()
 
-            # TODO: Accept true/false as a return value from game.loop and use
-            # that to stop the controller. This will allow the game to control
-            # the execution of the controller
-            self._game.loop(self._display, delta, self._input)
+            running = self._game.loop(input_data, display_data, delta)
 
             self._display_adaptor.show(delta)
