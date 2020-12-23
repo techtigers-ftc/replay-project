@@ -7,9 +7,10 @@ from magik import Controller
 from games.game import Game
 
 game = Game()
-display = Display(3, 3)
-adaptor = AsciiAdaptor(display)
-inputs = Inputs(2, 2)
+inputs = Inputs(2,2)
+controller = Controller()
+controller.set_display(Display(3,3), AsciiAdaptor)
+controller.set_game(game)
+controller.set_input(inputs)
 input_adaptor = InputAdaptor(inputs)
-controller = Controller(game, display, adaptor, inputs, input_adaptor)
 controller.start()
