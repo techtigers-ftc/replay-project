@@ -13,21 +13,22 @@ class DisplayData:
         :param height: how mnay pixels in one column
         :type height: Number
         """
-        self.pixels = []
-        self.height = height
-        self.width = width
+        self._pixels = []
+        self._height = height
+
+        self._width = width
 
         # Sets the pixels array to all off
-        for _ in range(self.height):
-            self.pixels.append([(0,0,0)] * self.width)
+        for _ in range(self._height):
+            self._pixels.append([(0,0,0)] * self._width)
 
     def clear_screen(self):
         """Clears the screen and sets all pixels to (0,0,0)
         """
 
-        for x_coord in range(self.height):
-            for y_coord in range(self.width):
-                self.pixels[x_coord][y_coord] = (0,0,0)
+        for x_coord in range(self._height):
+            for y_coord in range(self._width):
+                self._pixels[x_coord][y_coord] = (0,0,0)
 
     def set_pixel(self, x_coord, y_coord, color):
         """Sets a certain pixel to a color
@@ -40,10 +41,24 @@ class DisplayData:
         :type color: tuple
         """
 
-        self.pixels[x_coord][y_coord] = color
+        self._pixels[x_coord][y_coord] = color
+
+    def dump_pixels(self):
+        # TODO: Implement this
+        pass
+
+    @property
+    def width(self):
+        # TODO Implement this
+        return 0
+
+    @property
+    def height(self):
+        # TODO Implement this
+        return 0
 
     @property
     def pixels(self):
         """Returns the pixel grid represented by this object"""
 
-        return self.pixels
+        return self._pixels

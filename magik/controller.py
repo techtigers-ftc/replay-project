@@ -18,10 +18,10 @@ class Controller:
         self._display_adaptor = None
         self._game = None
         self. _input_adaptor = None
-        self._frame_delay = None
+        self._frame_delay = 0
 
-    def set_display(self, display_adaptor):
-        """ Sets the adaptor for the game
+    def set_display_adaptor(self, display_adaptor):
+        """ Sets the display adaptor for the game
 
         :param display_adaptor: Instance of adaptor to render the game
         :type display_adaptor: DisplayAdapter
@@ -43,14 +43,14 @@ class Controller:
             raise TypeError("Invalid game")
         self._game = game
 
-    def set_input(self, input_adaptor):
-        """ Sets the input for the game
+    def set_input_adaptor(self, input_adaptor):
+        """ Sets the input adaptor for the game
 
-        :param inputs: Instance of input adapter
-        :type Input: InputAdaptor
+        :param input_adaptor: Instance of input adapter
+        :type input_adaptor: InputAdaptor
         """
 
-        if not isinstance(input_adaptor, InputAdaptor) is None:
+        if not isinstance(input_adaptor, InputAdaptor):
             raise TypeError("Invalid input adaptor")
         self._input_adaptor = input_adaptor
 
@@ -61,8 +61,12 @@ class Controller:
         :type Input: Number
         """
 
-        if not frame_rate > 0:
-            raise ValueError("Invalid frame rate")
+        if not isinstance(frame_rate, int) and not isinstance(frame_rate, float):
+            raise TypeError("Invalid frame rate")
+
+        if frame_rate < 0:
+            raise ValueError("Frame rate cannot be negative")
+
         self._frame_delay = 1/frame_rate
 
     def start(self):
@@ -74,11 +78,8 @@ class Controller:
         if not isinstance(self._game, Game):
             raise Exception("Game has not been set")
 
-        if not isinstance(self._input_adaptor, InputAdaptor) is None:
+        if not isinstance(self._input_adaptor, InputAdaptor):
             raise Exception("Input adaptor has not been set")
-
-        if not self._frame_delay >= 0:
-            raise Exception("Frame rate has not been set")
 
         # Setting up the game, inputs and outputs
         self._game.setup()
@@ -92,8 +93,8 @@ class Controller:
             clock = time.time()
             time.sleep(max(self._frame_delay - delta, 0))
 
-            self._input_adaptor.read_raw_input()
+            self._input_adaptor.read(delta, input_data)
 
             running = self._game.loop(input_data, display_data, delta)
 
-            self._display_adaptor.show(delta)
+            self._display_adaptor.show(delta, display_data)
