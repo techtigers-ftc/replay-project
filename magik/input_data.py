@@ -56,24 +56,50 @@ class InputData:
         :type y_coord: Number
         """
 
-        # TODO: Validate array boundaries
+        if x_coord < 0 or x_coord >= self._width:
+            raise ValueError("X coordinate is out of range")
+
+        if y_coord < 0 or y_coord >= self._height:
+            raise ValueError("Y coordinate is out of range")
 
         self._inputs[x_coord][y_coord] = value
 
     def dump_input(self):
-        # TODO: Implement this
-        pass
+        """ Debug method for dumping all input values
+        """
+
+        values = self._inputs
+        for row in values:
+            for input_value in row:
+                print(input_value, end="")
+            print("")
 
     def dump_reference(self):
-        # TODO: Implement this
-        pass
+        """ Debug method for dumping all reference values
+        """
+
+        values = self._reference
+        for row in values:
+            for input_value in row:
+                print(input_value, end="")
+            print("")
 
     @property
     def width(self):
-        # TODO Implement this
-        return 0
+        """ Read only property of width.
+
+        :return: Returns width of input array
+        :type return: Number
+        """
+
+        return self._width
 
     @property
     def height(self):
-        # TODO Implement this
-        return 0
+        """ Read only property of height.
+
+        :return: Returns height of input array
+        :type return: Number
+        """
+
+        return self._height

@@ -54,4 +54,4 @@ class AsciiAdaptor(DisplayAdaptor): # pylint:disable=too-few-public-methods
             for pixel in row:
                 color = get_color_ascii(pixel)
                 print(color, end="")
-            print("\n")
+            print("")

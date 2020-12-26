@@ -44,18 +44,34 @@ class DisplayData:
         self._pixels[x_coord][y_coord] = color
 
     def dump_pixels(self):
-        # TODO: Implement this
-        pass
+        """ Debug method for dumping all pixel values
+        """
+
+        values = self._pixels
+        for row in values:
+            for pixel_value in row:
+                print(pixel_value, end="")
+            print("")
 
     @property
     def width(self):
-        # TODO Implement this
-        return 0
+        """ Read only property of width.
+
+        :return: Returns width of display array
+        :type return: Number
+        """
+
+        return self._width
 
     @property
     def height(self):
-        # TODO Implement this
-        return 0
+        """ Read only property of height.
+
+        :return: Returns height of input array
+        :type return: Number
+        """
+
+        return self._height
 
     @property
     def pixels(self):

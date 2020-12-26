@@ -96,5 +96,5 @@ class Controller:
             self._input_adaptor.read(delta, input_data)
 
             running = self._game.loop(input_data, display_data, delta)
-
             self._display_adaptor.show(delta, display_data)
+

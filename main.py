@@ -14,6 +14,6 @@ controller = Controller()
 controller.set_display_adaptor(display_adaptor)
 controller.set_game(game)
 controller.set_input_adaptor(input_adaptor)
-controller.set_frame_rate(30)
+controller.set_frame_rate(60)
 
 controller.start()
