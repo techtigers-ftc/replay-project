@@ -29,7 +29,7 @@ class NeoPixelAdaptor:
         ascii display.
         """
         self.display = display
-        self._grid = NeoPixel(Pin(5), self.display.width * self.display.height)
+        self._grid = NeoPixel(Pin(23), self.display.width * self.display.height)
 
     def show(self, delta):
         """ Show function will show the ascii display using the given display 
