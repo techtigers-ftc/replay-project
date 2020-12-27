@@ -7,7 +7,7 @@ import time
 
 def isData():
     counter = 0
-    while counter < 30:
+    while counter < 10:
         if select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], []):
             return True
         counter += 1
@@ -20,7 +20,6 @@ class KeyboardAdaptor(InputAdaptor):
 
     def read(self, delta, input_data):
         tty.setcbreak(sys.stdin.fileno())
-        counter = 0
         if isData():
             value = sys.stdin.read(1)
 
