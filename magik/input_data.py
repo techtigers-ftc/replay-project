@@ -84,6 +84,27 @@ class InputData:
                 print(input_value, end="")
             print("")
 
+    def is_x_valid(self, x):
+        """ Returns True if specific x coordinate is in range of width
+
+        :param x: The value to check
+        :type x: Number
+        :return: True if x in range of width
+        :type return: Boolean
+        """
+        return x_coord < 0 or x_coord >= self._width
+
+    def is_y_valid(self, y):
+        """ Returns True if specific y coordinate is in range of height
+
+        :param y: The value to check
+        :type y: Number
+        :return: True if y in range of height
+        :type return: Boolean
+        """
+
+        return y_coord < 0 or y_coord >= self._height
+
     @property
     def width(self):
         """ Read only property of width.

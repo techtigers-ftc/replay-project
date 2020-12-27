@@ -47,4 +47,8 @@ class KeyboardAdaptor(BaseInputAdaptor):
             key_mapping = KEY_MAP.get_item(key)
             if not key_mapping is None:
                 x_coord, y_coord, value = key_mapping
-                input_data.set_input(x_coord, y_coord, value)
+
+                if input_data.is_x_valid(x_coord) \
+                        and input_data.is_y_valid(y_coord): 
+                    input_data.set_input(x_coord, y_coord, value)
+
