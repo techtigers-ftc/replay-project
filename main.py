@@ -1,14 +1,14 @@
-from magik.adaptors.np_adaptor import NeoPixelAdaptor
-from magik.display_adaptors.ascii_adaptor import AsciiAdaptor
+# from magik.display_adaptors.np_adaptor import NeoPixelAdaptor as DisplayAdaptor
+from magik.display_adaptors.np_adaptor import NeoPixelAdaptor as DisplayAdaptor
 from magik import InputData
-from magik.input_adaptors import KeyboardAdaptor
+from magik.input_adaptors import KeyboardAdaptor as InputAdaptor
 from magik import DisplayData
 from magik import Controller
 from test_game import TestGame
 
 game = TestGame()
-display_adaptor = NeoPixelAdaptor()
-input_adaptor = KeyboardAdaptor()
+display_adaptor = DisplayAdaptor()
+input_adaptor = InputAdaptor()
 controller = Controller()
 
 controller.set_display_adaptor(display_adaptor)

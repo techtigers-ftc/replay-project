@@ -1,5 +1,6 @@
-from machine import Pin
+from ..display_adaptor import DisplayAdaptor
 from neopixel import NeoPixel
+from machine import Pin
 
 def get_color(rgb):
     """ This function will take a rgb tuple, and convert it into a color
@@ -23,15 +24,16 @@ def x_y_to_series_conversion(row_length, x, y):
        else:
            return row_length*y + row_length - x -1
 
-class NeoPixelAdaptor:
-    def __init__(self, display):
+class NeoPixelAdaptor(DisplayAdaptor):
+    def __init__(self):
         """ Ascii Adaptor class takes the display object and convert it into an 
         ascii display.
         """
+        super().__init__()
         self.display = display
         self._grid = NeoPixel(Pin(23), self.display.width * self.display.height)
 
-    def show(self, delta):
+    def show(self, delta, display_data):
         """ Show function will show the ascii display using the given display 
         object. Is used every loop in Controller.
 
