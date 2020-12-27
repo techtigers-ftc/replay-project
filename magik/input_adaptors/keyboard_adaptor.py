@@ -1,4 +1,4 @@
-from ..input_adaptor import InputAdaptor
+from .base_input_adaptor import BaseInputAdaptor
 import sys
 import select
 import tty
@@ -15,7 +15,7 @@ def isData():
         time.sleep(0.1)
     return False
 
-class KeyboardAdaptor(InputAdaptor):
+class KeyboardAdaptor(BaseInputAdaptor):
     def __init__(self):
         super().__init__()
 

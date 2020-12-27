@@ -1,6 +1,6 @@
-""" Module for InputAdaptor class """
+""" Module for BaseInputAdaptor class """
 
-class InputAdaptor: # pylint:disable=too-few-public-methods
+class BaseInputAdaptor: # pylint:disable=too-few-public-methods
     """ Abstract input adaptor class, do not use directly, always create child
         class
     """
