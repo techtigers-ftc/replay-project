@@ -1,4 +1,5 @@
 from magik.adaptors.np_adaptor import NeoPixelAdaptor
+from magik.display_adaptors.ascii_adaptor import AsciiAdaptor
 from magik import InputData
 from magik.input_adaptors import KeyboardAdaptor
 from magik import DisplayData
