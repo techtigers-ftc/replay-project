@@ -1,7 +1,7 @@
 """ Module for the Controller class """
 import time
 from .display_adaptor import DisplayAdaptor
-from .input_adaptor import InputAdaptor
+from .input_adaptors import BaseInputAdaptor
 from .game import Game
 
 
@@ -47,10 +47,10 @@ class Controller:
         """ Sets the input adaptor for the game
 
         :param input_adaptor: Instance of input adapter
-        :type input_adaptor: InputAdaptor
+        :type input_adaptor: BaseInputAdaptor
         """
 
-        if not isinstance(input_adaptor, InputAdaptor):
+        if not isinstance(input_adaptor, BaseInputAdaptor):
             raise TypeError("Invalid input adaptor")
         self._input_adaptor = input_adaptor
 
@@ -78,7 +78,7 @@ class Controller:
         if not isinstance(self._game, Game):
             raise Exception("Game has not been set")
 
-        if not isinstance(self._input_adaptor, InputAdaptor):
+        if not isinstance(self._input_adaptor, BaseInputAdaptor):
             raise Exception("Input adaptor has not been set")
 
         # Setting up the game, inputs and outputs

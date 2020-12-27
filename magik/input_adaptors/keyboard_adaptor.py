@@ -1,10 +1,10 @@
-from .base_input_adaptor import BaseInputAdaptor
 import sys
 import select
 import tty
 import termios
 import time
-from .key import Key
+
+from .base_input_adaptor import BaseInputAdaptor
 
 def isData():
     counter = 0
