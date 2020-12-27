@@ -1,7 +1,6 @@
+""" Top level package """
 
 __all__ = [ 'display_adaptors', 'input_adaptors', 'utils' ]
-
-""" Top level package """
 
 from .controller import Controller
 from .display_data import DisplayData
