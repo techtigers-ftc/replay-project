@@ -1,6 +1,6 @@
 """ Module for DisplayAdaptor class """
 
-class DisplayAdaptor: # pylint:disable=too-few-public-methods
+class BaseDisplayAdaptor: # pylint:disable=too-few-public-methods
     """ Abstract display adaptor class, do not use directly, always create child
         class
     """

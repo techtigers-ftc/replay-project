@@ -1,6 +1,6 @@
 """ Module for the Controller class """
 import time
-from .display_adaptor import DisplayAdaptor
+from .display_adaptors import BaseDisplayAdaptor
 from .input_adaptors import BaseInputAdaptor
 from .game import Game
 

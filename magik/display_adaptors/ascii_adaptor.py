@@ -1,6 +1,6 @@
 """ Module for AsciiAdaptor """
 
-from ..display_adaptor import DisplayAdaptor
+from .base_display_adaptor import BaseDisplayAdaptor
 from ..utils.styles import Colors
 try:
     from os import system

@@ -1,4 +1,4 @@
-from ..display_adaptor import DisplayAdaptor
+from .base_display_adaptor import BaseDisplayAdaptor
 from neopixel import NeoPixel
 from machine import Pin
 
