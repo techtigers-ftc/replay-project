@@ -30,8 +30,6 @@ class NeoPixelAdaptor(BaseDisplayAdaptor):
         ascii display.
         """
         super().__init__()
-        self.display = display
-        self._grid = NeoPixel(Pin(23), self.display.width * self.display.height)
 
     def show(self, delta, display_data):
         """ Show function will show the ascii display using the given display 
@@ -43,9 +41,11 @@ class NeoPixelAdaptor(BaseDisplayAdaptor):
         loop in the controller
         :type delta: Number
         """
-        pixels = self.display.get_pixels()
+        grid = NeoPixel(Pin(23), display_data.width * display_data.height)
+        pixels = display_data.pixels
         for y in pixels:
             for x in y:
-                index = x_y_to_series_conversion(self.display.width, y.index(x), pixels.index(y))
-                self._grid[index] = get_color(pixels[y[x]])
-        self._grid.write()
+                index = x_y_to_series_conversion(display_data.width, y.index(x), \
+                        pixels.index(y))
+                grid[index] = get_color(x)
+        grid.write()

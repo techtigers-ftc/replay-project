@@ -1,3 +1,5 @@
+from .base_input_adaptor import BaseInputAdaptor
+
 class GPIOAdaptor(BaseInputAdaptor):
     def __init__(self):
         super().__init__()

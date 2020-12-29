@@ -19,7 +19,7 @@ class TestGame(Game):
         self._set_display_dimensions(5, 5)
         self._set_input_dimensions(5, 5)
 
-    def loop1(self, input_data, display_data, delta):
+    def loop(self, input_data, display_data, delta):
         """ Loop function will loop throughout the controller program forever. It can
         be used as the basis for your game
 
@@ -29,16 +29,9 @@ class TestGame(Game):
             in the controller
         :type delta: Number
         """
-        display_data.set_pixel(self.counter, self.counter, (0,1,0))
-        diff = time.time() - self.clock
-        if diff > 2:
-            self.counter += 1
-            self.clock = time.time()
-        if self.counter == display_data.width:
-            self.counter = 0
-            display_data.clear_screen()
+        display_data.set_pixel(0, 0, (1, 0, 0))
 
-    def loop(self, input_data, display_data, delta):
+    def loop1(self, input_data, display_data, delta):
         """ Loop function will loop throughout the controller program forever. It can
         be used as the basis for your game
 
