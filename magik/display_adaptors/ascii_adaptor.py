@@ -6,6 +6,7 @@ try:
     from os import system
 except: # pylint:disable=bare-except
     from utils.system_shim import system
+from ..utils import system_check
 
 colors = Colors()
 def get_color_ascii(rgb):
@@ -28,7 +29,7 @@ def get_color_ascii(rgb):
 
     return "{} {} {}".format(colors.COL_BLACK, led_char, colors.COL_NORMAL)
 
-class AsciiAdaptor(DisplayAdaptor): # pylint:disable=too-few-public-methods
+class AsciiAdaptor(BaseDisplayAdaptor): # pylint:disable=too-few-public-methods
     """ Implements a display adaptor that uses ascii characters to show the game
         display.
     """
@@ -47,7 +48,13 @@ class AsciiAdaptor(DisplayAdaptor): # pylint:disable=too-few-public-methods
         :param display: Instance that will be converted
         :type display: Display
         """
-        system("clear")
+        if system_check.system_check() == "mac":
+            system("clear")
+        elif system_check.system_check() == "windows":
+            system("cls")
+        elif system_check.system_check() == "linux":
+            pass
+
         print("Frame: #{}\n".format(self._frame_number))
         self._frame_number += 1
         for row in display_data.pixels:

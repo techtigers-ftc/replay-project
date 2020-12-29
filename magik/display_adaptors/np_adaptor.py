@@ -24,7 +24,7 @@ def x_y_to_series_conversion(row_length, x, y):
        else:
            return row_length*y + row_length - x -1
 
-class NeoPixelAdaptor(DisplayAdaptor):
+class NeoPixelAdaptor(BaseDisplayAdaptor):
     def __init__(self):
         """ Ascii Adaptor class takes the display object and convert it into an 
         ascii display.

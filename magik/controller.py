@@ -27,7 +27,7 @@ class Controller:
         :type display_adaptor: DisplayAdapter
         """
 
-        if not isinstance(display_adaptor, DisplayAdaptor):
+        if not isinstance(display_adaptor, BaseDisplayAdaptor):
             raise TypeError("Invalid display adaptor")
 
         self._display_adaptor = display_adaptor
@@ -72,7 +72,7 @@ class Controller:
     def start(self):
         """ Sets up and starts the game loop
         """
-        if not isinstance(self._display_adaptor, DisplayAdaptor):
+        if not isinstance(self._display_adaptor, BaseDisplayAdaptor):
             raise Exception("Display adaptor has not been set")
 
         if not isinstance(self._game, Game):

@@ -41,7 +41,7 @@ class DisplayData:
         :type color: tuple
         """
 
-        self._pixels[x_coord][y_coord] = color
+        self._pixels[y_coord][x_coord] = color
 
     def dump_pixels(self):
         """ Debug method for dumping all pixel values

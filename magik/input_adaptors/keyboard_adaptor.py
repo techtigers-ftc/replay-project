@@ -8,7 +8,7 @@ from .base_input_adaptor import BaseInputAdaptor
 
 def isData():
     counter = 0
-    while counter < 30:
+    while counter < 10:
         if select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], []):
             return True
         counter += 1
@@ -42,9 +42,9 @@ class KeyboardAdaptor(BaseInputAdaptor):
         tty.setcbreak(sys.stdin.fileno())
 
     def read(self, delta, input_data):
-        key = sys.stdin.read(1)
         if isData():
-            key_mapping = KEY_MAP.get_item(key)
+            key = sys.stdin.read(1)
+            key_mapping = KEY_MAP[key]
             if not key_mapping is None:
                 x_coord, y_coord, value = key_mapping
 

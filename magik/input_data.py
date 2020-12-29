@@ -84,7 +84,7 @@ class InputData:
                 print(input_value, end="")
             print("")
 
-    def is_x_valid(self, x):
+    def is_x_valid(self, x_coord):
         """ Returns True if specific x coordinate is in range of width
 
         :param x: The value to check
@@ -92,9 +92,9 @@ class InputData:
         :return: True if x in range of width
         :type return: Boolean
         """
-        return x_coord < 0 or x_coord >= self._width
+        return x_coord >= 0 or x_coord <= self._width
 
-    def is_y_valid(self, y):
+    def is_y_valid(self, y_coord):
         """ Returns True if specific y coordinate is in range of height
 
         :param y: The value to check
@@ -103,7 +103,7 @@ class InputData:
         :type return: Boolean
         """
 
-        return y_coord < 0 or y_coord >= self._height
+        return y_coord >= 0 or y_coord <= self._height
 
     @property
     def width(self):
