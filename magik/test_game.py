@@ -29,7 +29,15 @@ class TestGame(Game):
             in the controller
         :type delta: Number
         """
-        display_data.set_pixel(0, 0, (1, 0, 0))
+        if self.counter == 0:
+            display_data.clear_screen
+        if time.time() - self.clock > 2:
+            self.clock = time.time()
+            self.counter += 1
+        print("Before setting display")
+        display_data.set_pixel(self.counter, self.counter, (1, 0, 0))
+        print("Before returning")
+        return True
 
     def loop1(self, input_data, display_data, delta):
         """ Loop function will loop throughout the controller program forever. It can

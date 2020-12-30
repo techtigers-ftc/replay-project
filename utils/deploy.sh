@@ -6,13 +6,20 @@ then
     exit 1
 fi
 
-if [ ! -z "${1}" ]
+if [ "${1}" = "clean" ]
 then
     echo "Deleting files from device"
     ampy -p ${PORT} rmdir magik
-    ampy -p ${PORT} rm main.py 
+    ampy -p ${PORT} rm start.py 
+    echo "Copying files to device"
+    ampy -p ${PORT} put ~/projects/fll/replay-project/start.py
+    ampy -p ${PORT} put ~/projects/fll/replay-project/magik
+elif [ "${1}" = "lib" ]
+then
+    echo "Copying library to device"
+    ampy -p ${PORT} put ~/projects/fll/replay-project/magik
+else
+    echo "Copying game program to device"
+    ampy -p ${PORT} put ~/projects/fll/replay-project/start.py
+    ampy -p ${PORT} put ~/projects/fll/replay-project/magik/test_game.py
 fi
-
-echo "Copying files to device"
-ampy -p ${PORT} put ~/projects/fll/replay-project/main.py
-ampy -p ${PORT} put ~/projects/fll/replay-project/magik
