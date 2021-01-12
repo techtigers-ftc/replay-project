@@ -8,16 +8,18 @@ class TestGame(Game):
     """
     def __init__(self):
         super().__init__("Testarooni")
-        self.counter = 0
-        self.timer = 0
-        self.clock = time.time()
+        self._counter = 0
+        self._prev_time = time.time()
+        self._width = 8
+        self._height = 8
 
     def setup(self):
         """ Setup function that is executed before the game loop starts. Can be used
         to initialize variables and other game parameters.
         """
-        self._set_display_dimensions(5, 5)
-        self._set_input_dimensions(5, 5)
+        self._set_display_dimensions(self._width, self._height)
+        self._set_input_dimensions(1, 1)
+        self._prev_time = time.time()
 
     def loop(self, input_data, display_data, delta):
         """ Loop function will loop throughout the controller program forever. It can
@@ -29,13 +31,19 @@ class TestGame(Game):
             in the controller
         :type delta: Number
         """
-        if self.counter == 0:
-            display_data.clear_screen
-        if time.time() - self.clock > 2:
-            self.clock = time.time()
-            self.counter += 1
+
+        if self._counter == 0:
+            print('Clearing screen')
+            display_data.clear_screen()
+
+        if time.time() - self._prev_time > 2:
+            print('Incrementing counter')
+            self._prev_time = time.time()
+            self._counter = (self._counter + 1) % self._width
+
         print("Before setting display")
-        display_data.set_pixel(self.counter, self.counter, (1, 0, 0))
+        display_data.set_pixel(self._counter, self._counter, (1, 0, 0))
+
         print("Before returning")
         return True
 
