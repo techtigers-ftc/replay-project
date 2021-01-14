@@ -33,18 +33,14 @@ class TestGame(Game):
         """
 
         if self._counter == 0:
-            print('Clearing screen')
             display_data.clear_screen()
 
         if time.time() - self._prev_time > 2:
-            print('Incrementing counter')
             self._prev_time = time.time()
             self._counter = (self._counter + 1) % self._width
 
-        print("Before setting display")
         display_data.set_pixel(self._counter, self._counter, (1, 0, 0))
 
-        print("Before returning")
         return True
 
     def loop1(self, input_data, display_data, delta):
