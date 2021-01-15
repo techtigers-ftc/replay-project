@@ -4,7 +4,7 @@ from magik import InputData
 from magik.input_adaptors import GPIOAdaptor as InputAdaptor
 from magik import DisplayData
 from magik import Controller
-from magik.test_game import TestGame
+from test_game import TestGame
 
 game = TestGame()
 display_adaptor = DisplayAdaptor()

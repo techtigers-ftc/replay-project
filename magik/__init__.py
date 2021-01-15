@@ -7,4 +7,3 @@ from .display_data import DisplayData
 from .input_data import InputData
 from .display_adaptors import BaseDisplayAdaptor
 from .game import Game
-from .test_game import TestGame

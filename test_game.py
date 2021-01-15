@@ -1,6 +1,7 @@
 """ Module for TestGame class """
 
 import time
+import random
 from magik import Game
 
 class TestGame(Game):
@@ -12,6 +13,12 @@ class TestGame(Game):
         self._prev_time = time.time()
         self._width = 8
         self._height = 8
+        self._x = random.randrange(self._width)
+        self._y = random.randrange(self._height)
+        self._r = random.randrange(65)
+        self._g = random.randrange(65)
+        self._b = random.randrange(65)
+        self._color = (self._r, self._g, self._b)
 
     def setup(self):
         """ Setup function that is executed before the game loop starts. Can be used
@@ -32,14 +39,18 @@ class TestGame(Game):
         :type delta: Number
         """
 
-        if self._counter == 0:
+        if time.time() - self._prev_time > 0.5:
+            self._prev_time = time.time()
+            self._x = random.randrange(self._width)
+            self._y = random.randrange(self._height)
+            self._r = random.randrange(65)
+            self._g = random.randrange(65)
+            self._b = random.randrange(65)
+            self._color = (self._r, self._g, self._b)
             display_data.clear_screen()
 
-        if time.time() - self._prev_time > 2:
-            self._prev_time = time.time()
-            self._counter = (self._counter + 1) % self._width
 
-        display_data.set_pixel(self._counter, self._counter, (1, 0, 0))
+        display_data.set_pixel(self._x, self._y, self._color)
 
         return True
 

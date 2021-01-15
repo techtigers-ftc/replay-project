@@ -73,7 +73,6 @@ class Controller:
         """ Sets up and starts the game loop
         """
 
-        print("hi")
         if not isinstance(self._display_adaptor, BaseDisplayAdaptor):
             raise Exception("Display adaptor has not been set")
 
@@ -98,6 +97,5 @@ class Controller:
             self._input_adaptor.read(delta, input_data)
 
             running = self._game.loop(input_data, display_data, delta)
-            print(running)
             self._display_adaptor.show(delta, display_data)
 

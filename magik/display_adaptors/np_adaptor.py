@@ -47,5 +47,5 @@ class NeoPixelAdaptor(BaseDisplayAdaptor):
             for x in y:
                 index = x_y_to_series_conversion(display_data.width, y.index(x), \
                         pixels.index(y))
-                grid[index] = get_color(x)
+                grid[index] = x
         grid.write()

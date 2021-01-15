@@ -14,6 +14,7 @@ then
     echo "Copying files to device"
     ampy -p ${PORT} put ~/projects/fll/replay-project/start.py
     ampy -p ${PORT} put ~/projects/fll/replay-project/magik
+    ampy -p ${PORT} put ~/projects/fll/replay-project/test_game.py
 elif [ "${1}" = "lib" ]
 then
     echo "Copying library to device"
@@ -21,5 +22,5 @@ then
 else
     echo "Copying game program to device"
     ampy -p ${PORT} put ~/projects/fll/replay-project/start.py
-    ampy -p ${PORT} put ~/projects/fll/replay-project/magik/test_game.py
+    ampy -p ${PORT} put ~/projects/fll/replay-project/test_game.py
 fi
