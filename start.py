@@ -1,12 +1,19 @@
+from magik.display_adaptors.ascii_adaptor import AsciiAdaptor as DisplayAdaptor
 # from magik.display_adaptors.np_adaptor import NeoPixelAdaptor as DisplayAdaptor
-from magik.display_adaptors.np_adaptor import NeoPixelAdaptor as DisplayAdaptor
 from magik import InputData
-from magik.input_adaptors import GPIOAdaptor as InputAdaptor
+from magik.input_adaptors import KeyboardAdaptor as InputAdaptor
 from magik import DisplayData
 from magik import Controller
-from test_game import TestGame
+from magik import Game
+from first_sprite import FirstSprite
 
-game = TestGame()
+sprites = []
+counter = 0
+while counter < 10:
+    sprites.append(FirstSprite())
+    counter += 1
+game = Game(sprites)
+game.set_display_dimensions(8, 8)
 display_adaptor = DisplayAdaptor()
 input_adaptor = InputAdaptor()
 controller = Controller()
