@@ -1,7 +1,7 @@
-from .base_input_adaptor import BaseInputAdaptor
-import machine
-from machine import Pin, ADC
-import time
+# from .base_input_adaptor import BaseInputAdaptor
+# import machine
+# from machine import Pin, ADC
+# import time
 
 class GPIOAdaptor(BaseInputAdaptor):
     def __init__(self):

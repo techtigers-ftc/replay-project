@@ -8,14 +8,14 @@ class Game:
     implemented within a game loop
     """
 
-    def __init__(self, name):
+    def __init__(self, sprites):
         """ Initializes the game instance
 
         :param name: The name of the game
         :type name: str
         """
-        if not isinstance(name, str):
-            raise TypeError("Invalid name for game")
+        if not isinstance(sprites, list):
+            raise TypeError("No sprites given in list form")
 
         self._display_width = 0
         self._display_height = 0
@@ -23,13 +23,16 @@ class Game:
         self._input_width = 0
         self._input_height = 0
 
-    def _set_display_dimensions(self, width, height):
+        self._sprites = sprites
+        print(self._sprites)
+
+    def set_display_dimensions(self, width, height):
         # Sets the display dimensions of the game.
 
         self._display_width = width
         self._display_height = height
+    def set_input_dimensions(self, width, height):
 
-    def _set_input_dimensions(self, width, height):
         # Sets the input dimensions of the game.
 
         self._input_width = width
@@ -54,9 +57,10 @@ class Game:
     def setup(self): # pylint:disable=no-self-use
         """ Can be implemented by child classes to setup the game """
 
-        raise Exception("Not implemented")
+        self.set_display_dimensions(self._display_width, self._display_height)
+        self.set_input_dimensions(1, 1)
 
-    def loop(self, input_data, output_data, delta): # pylint:disable=no-self-use
+    def loop(self, input_data, display_data, delta): # pylint:disable=no-self-use
         """ Can be implemented by child classes to execute the main game logic
 
         :param input_data: An object containing inputs from the user
@@ -66,5 +70,13 @@ class Game:
         :param delta: The time in milliseconds since this method was called
         :type delta: Number
         """
+        display_data.clear_screen()
+        for sprite in self._sprites:
+            print("Updating {}".format(sprite))
+            sprite.update(input_data)
+        for sprite in self._sprites:
+            print("Drawing {}".format(sprite))
+            sprite.draw(display_data)
+        return True
 
-        raise Exception("Not implemented")
+
