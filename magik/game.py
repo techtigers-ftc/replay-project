@@ -8,22 +8,19 @@ class Game:
     implemented within a game loop
     """
 
-    def __init__(self, sprites):
+    def __init__(self):
         """ Initializes the game instance
 
         :param name: The name of the game
         :type name: str
         """
-        if not isinstance(sprites, list):
-            raise TypeError("No sprites given in list form")
-
         self._display_width = 0
         self._display_height = 0
 
         self._input_width = 0
         self._input_height = 0
 
-        self._sprites = sprites
+        self._sprites = []
         print(self._sprites)
 
     def set_display_dimensions(self, width, height):
@@ -54,6 +51,25 @@ class Game:
 
         return InputData(self._input_width, self._input_height)
 
+    def add_sprite(self, sprite):
+        """ Adds a sprite to the sprites array
+
+        :param sprite: The sprite being added
+        :type sprite: Object
+        """
+        if sprite not in self._sprites:
+            self._sprites.append(sprite)
+            sprite.set_game(self)
+
+    def remove_sprite(self, sprite):
+        """ Removes a sprite to the sprites array
+
+        :param sprite: The sprite being removed
+        :type sprite: Object
+        """
+        if sprite in self._sprites:
+            self._sprites.remove(sprite)
+
     def setup(self): # pylint:disable=no-self-use
         """ Can be implemented by child classes to setup the game """
 
@@ -74,6 +90,12 @@ class Game:
         for sprite in self._sprites:
             print("Updating {}".format(sprite))
             sprite.update(input_data)
+        
+        for sprite in self._sprites:
+            if sprite.deleted == True:
+                print("Deleted {}".format(sprite))
+                self._sprites.remove(sprite)
+
         for sprite in self._sprites:
             print("Drawing {}".format(sprite))
             sprite.draw(display_data)

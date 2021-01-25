@@ -30,7 +30,7 @@ class DisplayData:
             for y_coord in range(self._width):
                 self._pixels[x_coord][y_coord] = (0,0,0)
 
-    def set_pixel(self, x_coord, y_coord, color):
+    def set_pixel(self, x_coord, y_coord, color, strict = False):
         """Sets a certain pixel to a color
 
         :param x_coord: The x coordinate of the pixel
@@ -40,8 +40,14 @@ class DisplayData:
         :param color: The color to apply to the pixel
         :type color: tuple
         """
+        if x_coord >= self._width or y_coord >= self._height: 
+            if strict:
+                raise Exception("Index out of range")
+            if not strict:
+                pass
+        else:
+            self._pixels[x_coord][y_coord] = color
 
-        self._pixels[y_coord][x_coord] = color
 
     def dump_pixels(self):
         """ Debug method for dumping all pixel values
