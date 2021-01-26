@@ -21,11 +21,15 @@ class Game:
         self._input_height = 0
 
         self._sprites = []
+        # TODO: [REVIEW] I see the use of a lot of print statements. You should
+        # consider the use of the logging library
         print(self._sprites)
 
     def set_display_dimensions(self, width, height):
         # Sets the display dimensions of the game.
 
+        # TODO: [REVIEW] The code will be easier to read if there is a new line
+        # between the end of one method and the start of the next.
         self._display_width = width
         self._display_height = height
     def set_input_dimensions(self, width, height):
@@ -73,6 +77,9 @@ class Game:
     def setup(self): # pylint:disable=no-self-use
         """ Can be implemented by child classes to setup the game """
 
+        # TODO: [REVIEW] This appears to be dummy code, and can have unexpected
+        # consequences. These are usually unexpected and bad consequences. It
+        # might be a good idea to delete this.
         self.set_display_dimensions(self._display_width, self._display_height)
         self.set_input_dimensions(1, 1)
 
@@ -90,7 +97,9 @@ class Game:
         for sprite in self._sprites:
             print("Updating {}".format(sprite))
             sprite.update(input_data)
-        
+            
+        # TODO: [REVIEW] You are attempting to change the loop while looping
+        # through its contents. Bad things will happen if you do this.
         for sprite in self._sprites:
             if sprite.deleted == True:
                 print("Deleted {}".format(sprite))
