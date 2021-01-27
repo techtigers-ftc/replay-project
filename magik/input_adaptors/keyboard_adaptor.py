@@ -44,7 +44,7 @@ class KeyboardAdaptor(BaseInputAdaptor):
     def read(self, delta, input_data):
         if isData():
             key = sys.stdin.read(1)
-            key_mapping = KEY_MAP[key]
+            key_mapping = KEY_MAP.get(key)
             if not key_mapping is None:
                 x_coord, y_coord, value = key_mapping
 
