@@ -32,6 +32,7 @@ class Game:
         # between the end of one method and the start of the next.
         self._display_width = width
         self._display_height = height
+
     def set_input_dimensions(self, width, height):
 
         # Sets the input dimensions of the game.
@@ -76,12 +77,7 @@ class Game:
 
     def setup(self): # pylint:disable=no-self-use
         """ Can be implemented by child classes to setup the game """
-
-        # TODO: [REVIEW] This appears to be dummy code, and can have unexpected
-        # consequences. These are usually unexpected and bad consequences. It
-        # might be a good idea to delete this.
-        self.set_display_dimensions(self._display_width, self._display_height)
-        self.set_input_dimensions(1, 1)
+        pass
 
     def loop(self, input_data, display_data, delta): # pylint:disable=no-self-use
         """ Can be implemented by child classes to execute the main game logic
@@ -93,17 +89,20 @@ class Game:
         :param delta: The time in milliseconds since this method was called
         :type delta: Number
         """
+        deleted_sprites = []
         display_data.clear_screen()
+
         for sprite in self._sprites:
             print("Updating {}".format(sprite))
             sprite.update(input_data)
+            if sprite.deleted == True:
+                deleted_sprites.append(sprite)
             
         # TODO: [REVIEW] You are attempting to change the loop while looping
         # through its contents. Bad things will happen if you do this.
-        for sprite in self._sprites:
-            if sprite.deleted == True:
-                print("Deleted {}".format(sprite))
-                self._sprites.remove(sprite)
+        for sprite in deleted_sprites:
+            print("Deleted {}".format(sprite))
+            self._sprites.remove(sprite)
 
         for sprite in self._sprites:
             print("Drawing {}".format(sprite))
