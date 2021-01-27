@@ -9,7 +9,7 @@ game = Game()
 first_sprite = FirstSprite()
 game.add_sprite(first_sprite)
 
-game.set_display_dimensions(8, 8)
+game.set_display_dimensions(9, 9)
 game.set_input_dimensions(3, 3)
 display_adaptor = DisplayAdaptor()
 input_adaptor = InputAdaptor()
