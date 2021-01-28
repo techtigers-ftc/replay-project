@@ -8,11 +8,11 @@ from .base_input_adaptor import BaseInputAdaptor
 
 def isData():
     counter = 0
-    while counter < 10:
+    while counter < 5:
         if select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], []):
             return True
         counter += 1
-        time.sleep(0.1)
+        time.sleep(0.01)
     return False
 
 KEY_MAP = {
