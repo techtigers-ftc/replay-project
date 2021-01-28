@@ -23,7 +23,7 @@ class Game:
         self._sprites = []
         # TODO: [REVIEW] I see the use of a lot of print statements. You should
         # consider the use of the logging library
-        print(self._sprites)
+        # print(self._sprites)
 
     def set_display_dimensions(self, width, height):
         # Sets the display dimensions of the game.
@@ -93,17 +93,17 @@ class Game:
         display_data.clear_screen()
 
         for sprite in self._sprites:
-            print("Updating {}".format(sprite))
+            # print("Updating {}".format(sprite))
             sprite.update(input_data)
             if sprite.destroyed == True:
                 destroyed_sprites.append(sprite)
             
         for sprite in destroyed_sprites:
-            print("Destroyed {}".format(sprite))
+            # print("Destroyed {}".format(sprite))
             self._sprites.remove(sprite)
 
         for sprite in self._sprites:
-            print("Drawing {}".format(sprite))
+            # print("Drawing {}".format(sprite))
             sprite.draw(display_data)
         return True
 
