@@ -89,19 +89,17 @@ class Game:
         :param delta: The time in milliseconds since this method was called
         :type delta: Number
         """
-        deleted_sprites = []
+        destroyed_sprites = []
         display_data.clear_screen()
 
         for sprite in self._sprites:
             print("Updating {}".format(sprite))
             sprite.update(input_data)
-            if sprite.deleted == True:
-                deleted_sprites.append(sprite)
+            if sprite.destroyed == True:
+                destroyed_sprites.append(sprite)
             
-        # TODO: [REVIEW] You are attempting to change the loop while looping
-        # through its contents. Bad things will happen if you do this.
-        for sprite in deleted_sprites:
-            print("Deleted {}".format(sprite))
+        for sprite in destroyed_sprites:
+            print("Destroyed {}".format(sprite))
             self._sprites.remove(sprite)
 
         for sprite in self._sprites:
