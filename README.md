@@ -1,2 +1,2 @@
 Hello!
-I like potatoes!    
+I like potatoes!
