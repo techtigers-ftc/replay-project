@@ -1,4 +1,4 @@
-# from .base_input_adaptor import BaseInputAdaptor
+from .base_input_adaptor import BaseInputAdaptor
 # import machine
 # from machine import Pin, ADC
 # import time
