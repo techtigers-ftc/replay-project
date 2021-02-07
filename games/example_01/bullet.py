@@ -3,8 +3,8 @@ import time
 
 MIN_X = 0
 MIN_Y = 0
-MAX_X = 8
-MAX_Y = 8
+MAX_X = 7
+MAX_Y = 7
 
 class Bullet(Sprite):
     def __init__(self, x, y, dx, dy):
@@ -12,7 +12,7 @@ class Bullet(Sprite):
         self._dx = dx
         self._dy = dy
         self._prev_time = time.time()
-        self._colors = [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
+        self._colors = [(32, 0, 16), (16, 32, 0), (0, 16, 32)]
         self._color_index = 0
         self._color = self._colors[0]
 
