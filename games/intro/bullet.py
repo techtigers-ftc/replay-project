@@ -11,14 +11,12 @@ class Bullet(Sprite):
         super().__init__(x,y)
         self._dx = dx
         self._dy = dy
-        self._prev_time = time.time()
         self._colors = [(32, 0, 16), (16, 32, 0), (0, 16, 32)]
         self._color_index = 0
         self._color = self._colors[0]
 
     def update(self, input_data):
-        if time.time() - self._prev_time > 0.5:
-            self._prev_time = time.time()
+        if self.has_timer_expired(100):
             self.set_position(self.x + self._dx, self.y + self._dy)
             self._color_index = (self._color_index + 1) % len(self._colors)
 

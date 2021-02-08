@@ -3,7 +3,7 @@ from magik.display_adaptors import NeoPixelAdaptor as DisplayAdaptor
 from magik.input_adaptors import GPIOAdaptor as InputAdaptor
 from magik import Controller
 from magik import Game
-from .space_ship import SpaceShip
+from .box import Box
 
 def play():
     """ Launches the game """
@@ -14,10 +14,10 @@ def play():
     game.set_input_dimensions(3, 3)
     
     # Create a single space ship sprite and add it to the game
-    # space_ship_sprite = SpaceShip(0, 0, 1, 0)
+    # space_ship_sprite = Box(0, 0, 1, 0)
     # game.add_sprite(space_ship_sprite)
-    space_ship_sprite_2 = SpaceShip(7, 7, 0, -1)
-    game.add_sprite(space_ship_sprite_2)
+    space_ship_sprite = Box(3, 3, 0, 0)
+    game.add_sprite(space_ship_sprite)
     
     # Initialize the controller and adapters for input and output
     display_adaptor = DisplayAdaptor()
