@@ -1,3 +1,3 @@
 """ Top level package """
 
-__all__ = [ 'intro' ]
+from .main import play

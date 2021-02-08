@@ -1,1 +1,3 @@
-from games.example_01 import start
+from games.intro import play
+
+play()
