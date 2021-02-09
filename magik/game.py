@@ -97,10 +97,13 @@ class Game:
             sprite.update(input_data)
             if sprite.destroyed == True:
                 destroyed_sprites.append(sprite)
-            
+        
         for sprite in destroyed_sprites:
             # print("Destroyed {}".format(sprite))
             self._sprites.remove(sprite)
+
+        if len(self._sprites) == 0:
+            return False
 
         for sprite in self._sprites:
             # print("Drawing {}".format(sprite))

@@ -1,4 +1,9 @@
-# TODO: [REVIEW] Include/update documentation
+try:
+    from utime import ticks_ms as get_clock
+except:
+    import time
+    def get_clock():
+        return round(time.time() * 1000)
 
 class Sprite:
     """ Base class for all sprite implementations """
@@ -26,6 +31,7 @@ class Sprite:
         self._bounding_box = None
 
         self._update_bounding_box()
+        self._prev_time = get_clock()
 
     def _update_bounding_box(self):
         """ Updates the bounding box for the sprite based on its position, width
@@ -34,6 +40,23 @@ class Sprite:
         bottom_right_y = self._y + self._height
         self._bounding_box = ((self._x, self._y),
                                             (bottom_right_x, bottom_right_y))
+
+    def has_timer_expired(self, duration, reset=True):
+        """ Returns true if the requested duration has elapsed since the last
+        time that the timer was cleared.
+
+        :param duration: The duration in milliseconds
+        :type duration: Number
+        :param reset: If true, resets the timer after each read. Optional value,
+                      defaults to True if omitted
+        :param reset: Boolean
+        """
+        if get_clock() - self._prev_time > duration:
+            if reset == True:
+                self._prev_time = get_clock()
+            return True
+        return False
+
 
     def set_position(self, x, y):
         """ Updates position of the sprite and recalculates bounding box
