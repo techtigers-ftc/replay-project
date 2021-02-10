@@ -2,6 +2,7 @@
 
 from .base_display_adaptor import BaseDisplayAdaptor
 from ..utils.styles import Colors
+import time
 
 try:
     from os import system
@@ -53,12 +54,20 @@ class AsciiAdaptor(BaseDisplayAdaptor): # pylint:disable=too-few-public-methods
         :param display: Instance that will be converted
         :type display: Display
         """
-        system(CLEAR_SCREEN_COMMAND)
 
-        print("Frame: #{}\n".format(self._frame_number))
-        self._frame_number += 1
-        for row in display_data.pixels:
-            for pixel in row:
+        lines = ['|'] * len(display_data.pixels)
+
+        for x_index in range(display_data.width):
+            for y_index in range(display_data.height):
+                line_index = display_data.height - y_index - 1
+                pixel = display_data.pixels[x_index][y_index]
+
                 color = get_color_ascii(pixel)
-                print(color, end="")
-            print("")
+                lines[line_index] += color
+
+        for line_index in range(len(lines)):
+            lines[line_index] += '|'
+
+        system(CLEAR_SCREEN_COMMAND)
+        print("Frame: #{}\n".format(self._frame_number))
+        print('\n'.join(lines))
