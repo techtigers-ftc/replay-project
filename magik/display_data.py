@@ -4,6 +4,7 @@ class DisplayData:
     """ Abstract representation of a display that can be used to develop games
     that many different displays can use if paired with the right adapter
     """
+
     # Init with initial variables
     def __init__(self, width, height):
         """ Initializes class instance
@@ -14,8 +15,8 @@ class DisplayData:
         :type height: Number
         """
         self._pixels = []
-        self._height = height
 
+        self._height = height
         self._width = width
 
         # Sets the pixels array to all off
@@ -26,8 +27,8 @@ class DisplayData:
         """Clears the screen and sets all pixels to (0,0,0)
         """
 
-        for x_coord in range(self._height):
-            for y_coord in range(self._width):
+        for x_coord in range(self._width):
+            for y_coord in range(self._height):
                 self._pixels[x_coord][y_coord] = (0,0,0)
 
     def set_pixel(self, x_coord, y_coord, color, strict = False):
