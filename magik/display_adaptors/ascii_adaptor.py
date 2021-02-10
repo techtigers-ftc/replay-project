@@ -2,11 +2,16 @@
 
 from .base_display_adaptor import BaseDisplayAdaptor
 from ..utils.styles import Colors
+
 try:
     from os import system
 except: # pylint:disable=bare-except
     from utils.system_shim import system
+
 from ..utils import system_check
+
+CLEAR_SCREEN_COMMAND = "cls" if system_check.system_check() == "windows" \
+                             else "clear"
 
 colors = Colors()
 def get_color_ascii(rgb):
@@ -48,12 +53,7 @@ class AsciiAdaptor(BaseDisplayAdaptor): # pylint:disable=too-few-public-methods
         :param display: Instance that will be converted
         :type display: Display
         """
-        if system_check.system_check() == "mac":
-            system("clear")
-        elif system_check.system_check() == "windows":
-            system("cls")
-        elif system_check.system_check() == "linux":
-            pass
+        system(CLEAR_SCREEN_COMMAND)
 
         print("Frame: #{}\n".format(self._frame_number))
         self._frame_number += 1
