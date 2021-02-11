@@ -71,6 +71,17 @@ class Sprite:
         self._y = y
         self._update_bounding_box()
 
+    def move(self, dx = 0, dy = 0):
+        """ Changes the x and y coordinate of the sprite by the given values
+
+        :param dx: The change to the x coordinate
+        :type dx: Number
+        :param dy: The change to the y coordinate
+        :type dy: Number
+        """
+
+        self.set_position(self.x + dx, self.y + dy)
+
     def set_dimensions(self, x, y):
         """ Updates dimensions of the sprite and recalculates bounding box
 

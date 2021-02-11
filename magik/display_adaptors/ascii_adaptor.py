@@ -25,9 +25,17 @@ def get_color_ascii(rgb):
     led_char = "\u29BF"
 
     if red >= 1:
+        if blue >= 1:
+            if green >= 1:
+                return "{} {} {}".format(colors.COL_WHITE, led_char, colors.COL_NORMAL)
+            return "{} {} {}".format(colors.COL_PURPLE, led_char, colors.COL_NORMAL)
+        if green >= 1:
+            return "{} {} {}".format(colors.COL_YELLOW, led_char, colors.COL_NORMAL)
         return "{} {} {}".format(colors.COL_RED, led_char, colors.COL_NORMAL)
 
     if green >= 1:
+        if blue >= 1:
+            return "{} {} {}".format(colors.COL_LIGHT_CYAN, led_char, colors.COL_NORMAL)
         return "{} {} {}".format(colors.COL_LIGHT_GREEN, led_char, colors.COL_NORMAL)
 
     if blue >= 1:
@@ -68,6 +76,7 @@ class AsciiAdaptor(BaseDisplayAdaptor): # pylint:disable=too-few-public-methods
         for line_index in range(len(lines)):
             lines[line_index] += '|'
 
+        self._frame_number += 1
         system(CLEAR_SCREEN_COMMAND)
         print("Frame: #{}\n".format(self._frame_number))
         print('\n'.join(lines))
