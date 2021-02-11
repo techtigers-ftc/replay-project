@@ -1,9 +1,9 @@
-from magik.display_adaptors import NeoPixelAdaptor as DisplayAdaptor
+from magik.display_adaptors import AsciiAdaptor as DisplayAdaptor
 # from magik.display_adaptors.np_adaptor import NeoPixelAdaptor as DisplayAdaptor
-from magik.input_adaptors import GPIOAdaptor as InputAdaptor
+from magik.input_adaptors import KeyboardAdaptor as InputAdaptor
 from magik import Controller
 from magik import Game
-from .box import Box
+from box import Box
 
 def play():
     """ Launches the game """
