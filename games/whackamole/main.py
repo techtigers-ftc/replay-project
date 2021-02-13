@@ -10,7 +10,7 @@ from games.whackamole.mole import Mole
 # Initialize game object and configure it
 game = Game()
 game.set_display_dimensions(8, 8)
-game.set_input_dimensions(3, 3)
+game.set_input_dimensions(2, 2)
 
 # Create a single space ship sprite and add it to the game
 # space_ship_sprite = Box(0, 0, 1, 0)
