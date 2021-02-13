@@ -34,3 +34,7 @@ def play():
     
     # Start the controller
     controller.start()
+
+if __name__ == "__main__":
+    # File is called as a script, not import - start the game
+    play()
