@@ -1,13 +1,12 @@
-from magik.display_adaptors import AsciiAdaptor as DisplayAdaptor
-# from magik.display_adaptors.np_adaptor import NeoPixelAdaptor as DisplayAdaptor
-from magik.input_adaptors import KeyboardAdaptor as InputAdaptor
 from magik import Controller
 from magik import Game
+from magik.input_adaptors import DefaultAdaptor as InputAdaptor
+from magik.display_adaptors import DefaultAdaptor as DisplayAdaptor
 
-from hb import Halfback
-from qb import Quarterback
-from ol import OLine
-from dl import DLine
+from games.football.hb import Halfback
+from games.football.qb import Quarterback
+from games.football.ol import OLine
+from games.football.dl import DLine
 
 """ Launches the game """
 

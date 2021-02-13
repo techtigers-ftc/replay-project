@@ -1,9 +1,9 @@
-from magik.display_adaptors import AsciiAdaptor as DisplayAdaptor
-# from magik.display_adaptors.np_adaptor import NeoPixelAdaptor as DisplayAdaptor
-from magik.input_adaptors import KeyboardAdaptor as InputAdaptor
 from magik import Controller
 from magik import Game
-from mole import Mole
+from magik.input_adaptors import DefaultAdaptor as InputAdaptor
+from magik.display_adaptors import DefaultAdaptor as DisplayAdaptor
+
+from games.whackamole.mole import Mole
 
 """ Launches the game """
 
