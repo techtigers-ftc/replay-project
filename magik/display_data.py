@@ -4,6 +4,7 @@ class DisplayData:
     """ Abstract representation of a display that can be used to develop games
     that many different displays can use if paired with the right adapter
     """
+
     # Init with initial variables
     def __init__(self, width, height):
         """ Initializes class instance
@@ -14,20 +15,20 @@ class DisplayData:
         :type height: Number
         """
         self._pixels = []
-        self._height = height
 
+        self._height = height
         self._width = width
 
         # Sets the pixels array to all off
-        for _ in range(self._height):
-            self._pixels.append([(0,0,0)] * self._width)
+        for _ in range(self._width):
+            self._pixels.append([(0,0,0)] * self._height)
 
     def clear_screen(self):
         """Clears the screen and sets all pixels to (0,0,0)
         """
 
-        for x_coord in range(self._height):
-            for y_coord in range(self._width):
+        for x_coord in range(self._width):
+            for y_coord in range(self._height):
                 self._pixels[x_coord][y_coord] = (0,0,0)
 
     def set_pixel(self, x_coord, y_coord, color, strict = False):
@@ -40,13 +41,11 @@ class DisplayData:
         :param color: The color to apply to the pixel
         :type color: tuple
         """
-        if x_coord >= self._width or y_coord >= self._height: 
-            if strict:
-                raise Exception("Index out of range")
-            if not strict:
-                pass
-        else:
+        if x_coord < self._width and x_coord >= 0 \
+                and y_coord < self._height and y_coord >= 0:
             self._pixels[x_coord][y_coord] = color
+        elif strict:
+            raise Exception("Index out of range")
 
 
     def dump_pixels(self):

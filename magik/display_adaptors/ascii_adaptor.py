@@ -2,11 +2,17 @@
 
 from .base_display_adaptor import BaseDisplayAdaptor
 from ..utils.styles import Colors
+import time
+
 try:
     from os import system
 except: # pylint:disable=bare-except
     from utils.system_shim import system
+
 from ..utils import system_check
+
+CLEAR_SCREEN_COMMAND = "cls" if system_check.system_check() == "windows" \
+                             else "clear"
 
 colors = Colors()
 def get_color_ascii(rgb):
@@ -19,9 +25,17 @@ def get_color_ascii(rgb):
     led_char = "\u29BF"
 
     if red >= 1:
+        if blue >= 1:
+            if green >= 1:
+                return "{} {} {}".format(colors.COL_WHITE, led_char, colors.COL_NORMAL)
+            return "{} {} {}".format(colors.COL_PURPLE, led_char, colors.COL_NORMAL)
+        if green >= 1:
+            return "{} {} {}".format(colors.COL_YELLOW, led_char, colors.COL_NORMAL)
         return "{} {} {}".format(colors.COL_RED, led_char, colors.COL_NORMAL)
 
     if green >= 1:
+        if blue >= 1:
+            return "{} {} {}".format(colors.COL_LIGHT_CYAN, led_char, colors.COL_NORMAL)
         return "{} {} {}".format(colors.COL_LIGHT_GREEN, led_char, colors.COL_NORMAL)
 
     if blue >= 1:
@@ -48,17 +62,21 @@ class AsciiAdaptor(BaseDisplayAdaptor): # pylint:disable=too-few-public-methods
         :param display: Instance that will be converted
         :type display: Display
         """
-        if system_check.system_check() == "mac":
-            system("clear")
-        elif system_check.system_check() == "windows":
-            system("cls")
-        elif system_check.system_check() == "linux":
-            pass
 
-        print("Frame: #{}\n".format(self._frame_number))
-        self._frame_number += 1
-        for row in display_data.pixels:
-            for pixel in row:
+        lines = ['|'] * len(display_data.pixels)
+
+        for x_index in range(display_data.width):
+            for y_index in range(display_data.height):
+                line_index = display_data.height - y_index - 1
+                pixel = display_data.pixels[x_index][y_index]
+
                 color = get_color_ascii(pixel)
-                print(color, end="")
-            print("")
+                lines[line_index] += color
+
+        for line_index in range(len(lines)):
+            lines[line_index] += '|'
+
+        self._frame_number += 1
+        system(CLEAR_SCREEN_COMMAND)
+        print("Frame: #{}\n".format(self._frame_number))
+        print('\n'.join(lines))
