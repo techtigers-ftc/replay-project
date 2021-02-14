@@ -3,7 +3,7 @@ from magik.display_adaptors import AsciiAdaptor as DisplayAdaptor
 from magik.input_adaptors import KeyboardAdaptor as InputAdaptor
 from magik import Controller
 from magik import Game
-from row import Row
+from floor_is_lava import Lava
 
 
 # Initialize game object and configure it
@@ -12,14 +12,14 @@ game.set_display_dimensions(8, 8)
 game.set_input_dimensions(3, 3)
 
 # Create a single space ship sprite and add it to the game
-game.add_sprite(Row(0))
-game.add_sprite(Row(1))
-game.add_sprite(Row(2))
-game.add_sprite(Row(3))
-game.add_sprite(Row(4))
-game.add_sprite(Row(5))
-game.add_sprite(Row(6))
-game.add_sprite(Row(7))
+game.add_sprite(Lava(0))
+game.add_sprite(Lava(1))
+game.add_sprite(Lava(2))
+game.add_sprite(Lava(3))
+game.add_sprite(Lava(4))
+game.add_sprite(Lava(5))
+game.add_sprite(Lava(6))
+game.add_sprite(Lava(7))
 
 # Initialize the controller and adapters for input and output
 display_adaptor = DisplayAdaptor()
