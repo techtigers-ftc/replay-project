@@ -1,27 +1,41 @@
 from machine import Pin, ADC
 from time import sleep
 
-thresholds = (900, 900, 220, 220)
-
+thresholds = (1400, 1100, 220, 220)
+#TODO: Figure out thresholds, test by screening
 def read():
     outputs = [ Pin(13, Pin.OUT), Pin(12, Pin.OUT)  ]
     inputs = [ ADC(Pin(39)),  ADC(Pin(32)) ]
 
     for inp in inputs:
         inp.atten(ADC.ATTN_0DB)
-
-    ref = read_pressure(outputs, inputs)
+      
+    ref_1 = read_pressure(outputs, inputs)
+    sleep(0.1)
+    ref_2 = read_pressure(outputs, inputs)
+    sleep(0.1)        
+    ref_3 = read_pressure(outputs, inputs)
+    sleep(0.1)
+    ref_4 = read_pressure(outputs, inputs)
+    sleep(0.1)        
+    ref_5 = read_pressure(outputs, inputs)
+    ref_avg = []
+    for sensor in range(0, 4):
+        ref_sum = int((ref_1[sensor] + ref_2[sensor] + ref_3[sensor] + ref_4[sensor] + ref_5[sensor])/5)
+        ref_avg.append(ref_sum)
     while True:
         current = read_pressure(outputs, inputs)
-        on = [ False, False, False, False ]
+        is_on = [ False, False, False, False ]
         for index in range(len(current)):
-            current[index] -= ref[index]
-            on[index] = (current[index] > thresholds[index])
-
-        print(current)
+            current[index] -= ref_avg[index]
+            is_on[index] = (current[index] > thresholds[index])
+        
+        print(ref_avg)  
+        print(current) 
         print(thresholds)
-        print(on)
+        print(is_on)
         print('-----')
+
         
 def read_pressure(outputs, inputs):
     result = [0,0,0,0]

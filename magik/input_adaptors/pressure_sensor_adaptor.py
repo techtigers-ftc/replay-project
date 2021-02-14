@@ -3,7 +3,7 @@ from .base_input_adaptor import BaseInputAdaptor
 # from machine import Pin, ADC
 # import time
 
-class GPIOAdaptor(BaseInputAdaptor):
+class PressureSensorAdaptor(BaseInputAdaptor):
     def __init__(self):
         super().__init__()
         # self.gpio_pin_1 = "INSERT PIN"

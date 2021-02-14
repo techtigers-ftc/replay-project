@@ -3,7 +3,7 @@ import sys
 from .base_input_adaptor import BaseInputAdaptor
 
 if sys.platform == "esp32":
-    from .gpio_adaptor import GPIOAdaptor as DefaultAdaptor
+    from .gpio_adaptor import PressureSensorAdaptor as DefaultAdaptor
 elif:
     from .win_keyboard_adaptor import WinKeyboardAdaptor as DefaultAdaptor
 else:
