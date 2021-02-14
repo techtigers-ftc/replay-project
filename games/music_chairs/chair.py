@@ -1,6 +1,5 @@
 from magik import Sprite
 import random
-import wait
 
 class Chair(Sprite):
     def __init__(self, x = 0, y = 0):
