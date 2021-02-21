@@ -18,8 +18,10 @@ class NeoPixelAdaptor(BaseDisplayAdaptor):
 
     def setup(self, display_data):
         """Overides the base class
-        """        
-        self._grid = NeoPixel(Pin(23), 64)
+        """
+
+        strip_size =  display_data.height * display_data.width
+        self._grid = NeoPixel(Pin(23), strip_size)
 
 
     def show(self, delta, display_data):
