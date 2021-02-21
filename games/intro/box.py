@@ -1,6 +1,6 @@
 from magik import Sprite
 
-from bullet import Bullet
+from games.intro.bullet import Bullet
 
 class Box(Sprite):
     def __init__(self, x = 0, y = 0, dx = 0, dy = 0):
