@@ -87,6 +87,11 @@ class Controller:
         display_data = self._game.create_display()
         input_data = self._game.create_input()
 
+        # Initializing display and input adaptors
+        self._display_adaptor.setup(display_data)
+        self._input_adaptor.setup(input_data)
+
+
         clock = time.time()
         running = True
         while running:
