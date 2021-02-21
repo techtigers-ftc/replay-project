@@ -14,7 +14,13 @@ class NeoPixelAdaptor(BaseDisplayAdaptor):
         ascii display.
         """
         super().__init__()
+     
+
+    def setup(self, display_data):
+        """Overides the base class
+        """        
         self._grid = NeoPixel(Pin(23), 64)
+
 
     def show(self, delta, display_data):
         """ Show function will show the ascii display using the given display 
