@@ -6,20 +6,20 @@ class BaseInputAdaptor: # pylint:disable=too-few-public-methods
     """
     def __init__(self):
         pass
-    
+
     def setup(self, input_data):
         """Provides a setup option for the child classes to prepare before the
         game starts
-        
-        :param input_data: refrence to input data object 
+
+        :param input_data: Reference to input data object
         :type input_data: InputData
         """
-        pass 
+        pass
 
     def read(self, input_data): # pylint:disable=no-self-use
         """ Read input from physical device
-        
-        :param input_data: refrence to input data object 
+
+        :param input_data: Reference to input data object
         :type input_data: InputData
         """
         raise Exception("Not implemented")
