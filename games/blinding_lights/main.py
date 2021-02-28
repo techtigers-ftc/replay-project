@@ -1,12 +1,17 @@
 from magik import launch_single_tile
 
-from games.amu.person import Person
+from floor_is_lava import Lava
 
 def play():
-    """ Launches the game """
-
     sprites = [
-        Person(0, 0)
+        Lava(0),
+        Lava(1),
+        Lava(2),
+        Lava(3),
+        Lava(4),
+        Lava(5),
+        Lava(6),
+        Lava(7)
     ]
 
     launch_single_tile(sprites)
