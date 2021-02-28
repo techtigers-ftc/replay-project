@@ -1,6 +1,6 @@
 from magik import Controller
 from magik import Game
-from magik.input_adaptors import DefaultAdaptor as InputAdaptor
+from magik.input_adaptors.keyboard_adaptor import KeyboardAdaptor as InputAdaptor
 from magik.display_adaptors import DefaultAdaptor as DisplayAdaptor
 
 from games.whackamole.mole import Mole
@@ -9,8 +9,8 @@ from games.whackamole.mole import Mole
 
 # Initialize game object and configure it
 game = Game()
-game.set_display_dimensions(8, 8)
-game.set_input_dimensions(2, 2)
+game.set_display_dimensions(3,3)
+game.set_input_dimensions(3, 3)
 
 # Create a single space ship sprite and add it to the game
 # space_ship_sprite = Box(0, 0, 1, 0)
