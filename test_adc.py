@@ -1,7 +1,7 @@
 from machine import Pin, ADC
 from time import sleep
 
-thresholds = (900, 900, 220, 220)
+thresholds = (200, 200, 200, 200)
 
 def read():
     outputs = [ Pin(13, Pin.OUT), Pin(12, Pin.OUT)  ]
@@ -19,7 +19,7 @@ def read():
             on[index] = (current[index] > thresholds[index])
 
         print(current)
-        print(thresholds)
+        # print(thresholds)
         print(on)
         print('-----')
         

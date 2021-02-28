@@ -9,7 +9,7 @@ class Halfback(Player):
         self._trail_color = self._colors[3]
         self._counter = 0
         self._movement = [(0, 0, 0), (1, 1, 0), (1, 0, 1), (1, 1, 1), (0, 1, 1),\
-                (0, 1, 1), (0, 1, 1)]
+                (0, 1, 1), (0, 1, 1), (0, 1, 1)]
         self._prev_movements = []
         self._carrier = False
 
