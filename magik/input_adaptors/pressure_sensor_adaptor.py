@@ -1,5 +1,6 @@
 from .base_input_adaptor import BaseInputAdaptor
 from machine import Pin, ADC
+from utime import sleep
 #import time
 
 AVAILABLE_OUTPUT_PIN_NUMBERS = [ 13, 12, 14, 27 ]
@@ -24,7 +25,7 @@ class PressureSensorAdaptor(BaseInputAdaptor):
 
         ref_values = []
         for index in range(MAX_REF_VALUES):
-            ref_values.append(read_pressure(outputs, inputs))
+            ref_values.append(self.__read_pressure())
             sleep(0.1)
 
         ref_sum = [ 0 ] * self.__total_inputs
@@ -67,7 +68,7 @@ class PressureSensorAdaptor(BaseInputAdaptor):
 
 
         for pin_index in range(input_data.height):
-            input_pin_numer  = AVAILABLE_INPUT_PIN_NUMBERS[pin_index]
+            input_pin_number  = AVAILABLE_INPUT_PIN_NUMBERS[pin_index]
             pin = Pin(input_pin_number, Pin.IN)
             adc = ADC(pin)
             self.__input_pins.append(adc)
@@ -82,3 +83,9 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         for index in range(len(current)):
             current[index] -= self.__ref_avg[index]
             is_on[index] = (current[index] > self.__thresholds[index])
+
+        input_data.set_input(0, 0, is_on[0]) 
+        input_data.set_input(1, 0, is_on[1]) 
+        input_data.set_input(0, 1, is_on[2]) 
+        input_data.set_input(1, 1, is_on[3]) 
+        print(is_on)
