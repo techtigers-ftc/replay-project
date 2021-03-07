@@ -36,12 +36,12 @@ class Halfback(Player):
 
         if input_data.get_input(0,0) == 1:
             self._color = self._colors[1]
-        # elif input_data.get_input(1,0) == 1:
-        #     self._color = self._colors[2]
-        # elif input_data.get_input(0,1) == 1:
-        #     self._color = self._colors[3]
-        # elif input_data.get_input(1,1) == 1:
-        #     self._color = self._colors[4]
+        elif input_data.get_input(1,0) == 1:
+            self._color = self._colors[2]
+        elif input_data.get_input(0,1) == 1:
+            self._color = self._colors[3]
+        elif input_data.get_input(1,1) == 1:
+            self._color = self._colors[4]
         else:
             self._color = self._colors[0]
 
