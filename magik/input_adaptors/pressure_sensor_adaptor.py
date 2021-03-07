@@ -19,7 +19,6 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         self.__height = 0
         self.__ref_avg = [[]]
         self.__thresholds = [[220, 220], [220, 220]]
-        # self.__thresholds = [[100, 100], [100, 100]]
         self.__timers = self.__initialize_grid()
     
     def __initialize_grid(self, initial_value = 0):
@@ -43,7 +42,7 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         ref_values = []
         for index in range(MAX_REF_VALUES):
             ref_values.append(self.__read_pressure())
-            utime.sleep(0.1)
+            utime.sleep(0.01)
 
         # Calculate sum of raw readings
         def add_refs(row,col,val):
@@ -114,13 +113,12 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         def check_on(row, col, val):
             current[row][col] -= self.__ref_avg[row][col]
             is_on[row][col] = (current[row][col] > self.__thresholds[row][col])
-            print("({},{}): {}, {}, {}, {}".format(row, col,
-                current[row][col],
-                self.__ref_avg[row][col],
-                self.__thresholds[row][col],
-                is_on[row][col]))
-            # print('---> ', is_on)
-            print('-----------')
+            # print("({},{}): {}, {}, {}, {}".format(row, col,
+            #     current[row][col],
+            #     self.__ref_avg[row][col],
+            #     self.__thresholds[row][col],
+            #     is_on[row][col]))
+            # print('-----------')
 
         def debounce(row, col, val):
             timer_value = self.__timers[row][col]
@@ -136,23 +134,6 @@ class PressureSensorAdaptor(BaseInputAdaptor):
                     self.__timers[row][col] = 0
             
             input_data.set_input(row, col, input_value)
-            # print("({}, {}): {}, {}, {}".format(row, col,
-            #     sensor_on,
-            #     self.__timers[row][col],
-            #     utime.ticks_ms()))
-
-            # if is_on[row][col]:
-            #     if self.__timers[row][col] == 0:
-                    # self.__timers[row][col] == utime.ticks_ms()
-            #     elif utime.ticks_diff(utime.ticks_ms(), \
-            #                             self.__timers[row][col]) > 10:
-            #         input_data.set_input(row, col, True) 
-            # else:
-            #     self.__timers[row][col] == 0
-            # print("({},{}): {}, {}".format(row, col,
-            #     is_on[row][col],
-            #     self.__timers[row][col]))
-            # print('-----------')
 
         self.__iterate_grid(current, check_on)
 
@@ -161,30 +142,4 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         # if is_on[1][1]:
         #     is_on[0][1] = False
 
-        if is_on[1][1]:
-            is_on[0][0] = False
-            is_on[1][0] = False
-            is_on[0][1] = False
-        elif is_on[1][0]:
-            is_on[0][0] = False
-            is_on[1][1] = False
-            is_on[0][1] = False
-        elif is_on[0][1]:
-            is_on[0][0] = False
-            is_on[1][1] = False
-            is_on[1][0] = False
-        elif is_on[0][0]:
-            is_on[0][0] = False
-            is_on[1][1] = False
-            is_on[0][1] = False
-
-        # print('===========')
-        # print(is_on)
-        input_data.dump_input()
-        print('===========')
-
         self.__iterate_grid(is_on, debounce)
-
-        # print('===========')
-        # print(self.__timers)
-        # print('===========')
