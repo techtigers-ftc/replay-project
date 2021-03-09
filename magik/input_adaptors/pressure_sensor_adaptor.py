@@ -18,7 +18,7 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         self.__width = 0
         self.__height = 0
         self.__ref_avg = [[]]
-        self.__thresholds = [[220, 220], [220, 220]]
+        self.__thresholds = [[600, 500], [200, 300]]
         self.__timers = self.__initialize_grid()
     
     def __initialize_grid(self, initial_value = 0):
@@ -114,10 +114,10 @@ class PressureSensorAdaptor(BaseInputAdaptor):
             current[row][col] -= self.__ref_avg[row][col]
             is_on[row][col] = (current[row][col] > self.__thresholds[row][col])
             # print("({},{}): {}, {}, {}, {}".format(row, col,
-            #     current[row][col],
-            #     self.__ref_avg[row][col],
-            #     self.__thresholds[row][col],
-            #     is_on[row][col]))
+            #      current[row][col],
+            #      self.__ref_avg[row][col],
+            #      self.__thresholds[row][col],
+            #      is_on[row][col]))
             # print('-----------')
 
         def debounce(row, col, val):
@@ -137,9 +137,9 @@ class PressureSensorAdaptor(BaseInputAdaptor):
 
         self.__iterate_grid(current, check_on)
 
-        # if is_on[1][0]:
-        #     is_on[0][0] = False
-        # if is_on[1][1]:
-        #     is_on[0][1] = False
+        if is_on[1][0]:
+            is_on[0][0] = False
+        if is_on[1][1]:
+            is_on[0][1] = False
 
         self.__iterate_grid(is_on, debounce)
