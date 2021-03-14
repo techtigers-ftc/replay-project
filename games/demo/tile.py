@@ -38,8 +38,19 @@ class Tile(Sprite):
                 self._colors = self._off_colors
 
     def draw(self, display_data):
-        for x in range(8):
-            color_index = (self.x_index + x) % 8
-            color = self._colors[color_index]
-            for y in range(8):
+        for col in range(8):
+            # color_index = (self.x_index + x) % 8
+            # color = self._colors[color_index]
+            for row in range(col+1):
                 display_data.set_pixel(x, y, color)
+
+
+
+
+
+
+
+
+
+
+
