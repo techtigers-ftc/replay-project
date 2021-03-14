@@ -19,7 +19,7 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         self.__height = 0
         self.__ref_avg = [[]]
         ##300 needs to be lesser
-        self.__thresholds = [[600, 500], [200, 300]]
+        self.__thresholds = [[1000, 800], [1000, 800]]
         self.__timers = self.__initialize_grid()
     
     def __initialize_grid(self, initial_value = 0):
