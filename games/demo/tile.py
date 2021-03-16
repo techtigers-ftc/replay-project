@@ -42,7 +42,7 @@ class Tile(Sprite):
             # color_index = (self.x_index + x) % 8
             # color = self._colors[color_index]
             for row in range(col+1):
-                display_data.set_pixel(x, y, color)
+                display_data.set_pixel(self.x, self.y, color)
 
 
 
