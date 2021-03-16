@@ -29,6 +29,7 @@ class Mole(Sprite):
         self._display_state_index = 0
         self._color_index = 0
         self._ticks = 0
+        self._state = None
 
     def update(self, input_data):
         if not self.has_timer_expired(100):
@@ -40,22 +41,32 @@ class Mole(Sprite):
                             or input_data.get_input(1,0) == 1 \
                             or input_data.get_input(1,1) == 1
 
-        if self._ticks >= 20:
-            self._game.add_sprite(Fail())
-            self._game.add_sprite(Mole())
-            self.destroy()
+        if self._state is not None:
+            if self._ticks > 5:
+                self._game.add_sprite(Mole())
+                self.destroy()
+        elif self._ticks >= 20:
+            self._state= "FAIL"
+            self._ticks = 0
+            
         elif input_detected:
-            self._game.add_sprite(Success())
-            self._game.add_sprite(Mole())
-            self.destroy()
+            self._state = "SUCCESS"
+            self._ticks = 0
+
         else:
             self._color_index = (self._color_index + 1) % len(self._colors)
             self._display_state_index = (self._display_state_index + 1) % \
                                                     len(self._display_states)
 
+
     def draw(self, display_data):
         deltas = self._display_states[self._display_state_index]
         color = self._colors[self._color_index]
+
+        if self._state == "SUCCESS":
+            color = (0,255,0)
+        elif self._state == "FAIL":
+            color = (255,0,0)
         for index in range(len(deltas)):
             dx, dy = deltas[index]
             display_data.set_pixel(self.x + dx, self.y + dy, color)
