@@ -24,28 +24,40 @@ in person. We made an SDK so that:
 
 # Design
 
-Our input adaptors take our inputs and convert them into a standard format. Then our gane interprets those inputs and returns a standard format of what to draw. The Output adaptors take that and then write it to the final display.
+Our design is in the picture below
 
-### Input
+![poo](~/desktop/SDK.png)
+
+All games have an input and an output. Ours does too. The difference is that we want our games to be able to interact with different inputs and outputs. 
+
+To do this we use adaptors. The job of these adaptors is to convert a signal from a keyboard or pressure senson into a standard input that our game can read.
+
+It is very similar to the output, our game sets the pixels in a standard format and out output adaptors convert it into something a display can show.
+
+### Supported Input
  - Keyboard
  - Pressure Sensor
-### Output
+### Supported Output
 - Ascii
 - LEDs on mat
 
 # Installation
 
-Clone?
+Clone 
+https://github.com/techtigers-fll/replay-project
 
 # Usage
 
-1. Go into the games directory and create a new directory
-2. Create __innit\_\_.py, main.py and {insert sprite}.py
-3. look at /games/demo and copy much of the structure
-4. replace the initialize sprites and other uniqe things
-5. before you run, make sure to
-`` export PYTHONPATH="~/replay-project/" ``
+When you clone you will see 2 main folders, magik, games
 
+Magik is our sdk and games has games that we have written.
+
+If you want to write a game you can.
+Creat main init and a sprite.
+
+Inside the sprite, create an update and draw function.
+
+For examples look in the examples.
 ## Examples
 
 - [demo](https://github.com/techtigers-fll/replay-project/tree/master/games/demo)

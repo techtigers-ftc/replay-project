@@ -25,6 +25,8 @@ class Tile(Sprite):
         ]
         self._colors = self._off_colors
         self.x_index = 0
+        self.x = 0
+        self.y = 0
 
     def update(self, input_data):
         if self.has_timer_expired(250):
@@ -39,8 +41,8 @@ class Tile(Sprite):
 
     def draw(self, display_data):
         for col in range(8):
-            # color_index = (self.x_index + x) % 8
-            # color = self._colors[color_index]
+            color_index = (self.x_index + self.x) % 8
+            color = self._colors[color_index]
             for row in range(col+1):
                 display_data.set_pixel(self.x, self.y, color)
 
