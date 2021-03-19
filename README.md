@@ -15,6 +15,8 @@ It consists of:
 
 For for info look [here](https://www.techtigers.team/replay/project)
 
+![Magik Demo](images/magik-demo.gif)
+
 # Motivation
 During the pandemic, it was not safe to test our prototype with people
 in person. We made an SDK so that:
