@@ -26,7 +26,7 @@ in person. We made an SDK so that:
 
 Our design is in the picture below
 
-![poo](~/desktop/SDK.png)
+![Magik SDK](images/magik-sdk.png)
 
 All games have an input and an output. Ours does too. The difference is that we want our games to be able to interact with different inputs and outputs. 
 
