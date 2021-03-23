@@ -19,7 +19,6 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         self.__height = 0
         self.__ref_avg = [[]]
         ##300 needs to be lesser
-        self.__thresholds = [[1000, 800], [1000, 800]]
         self.__timers = self.__initialize_grid()
     
     def __initialize_grid(self, initial_value = 0):
@@ -111,36 +110,19 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         current = self.__read_pressure()
         is_on = self.__initialize_grid(False)
 
-        def check_on(row, col, val):
-            current[row][col] -= self.__ref_avg[row][col]
-            is_on[row][col] = (current[row][col] > self.__thresholds[row][col])
+        def set_current(row, col, val):
+            current[row][col] = \
+                    round(current[row][col] - self.__ref_avg[row][col], 2)
+            print(round(current[row][col] - self.__ref_avg[row][col], 2))
             # print("({},{}): {}, {}, {}, {}".format(row, col,
             #      current[row][col],
             #      self.__ref_avg[row][col],
-            #      self.__thresholds[row][col],
             #      is_on[row][col]))
             # print('-----------')
 
-        def debounce(row, col, val):
-            timer_value = self.__timers[row][col]
-            sensor_on = is_on[row][col]
-            input_value = 0
-            if timer_value == 0:
-                if sensor_on:
-                    self.__timers[row][col] = utime.ticks_ms()
-            elif utime.ticks_diff(utime.ticks_ms(), timer_value) > DEBOUNCE_TIME:
-                if sensor_on:
-                    input_value = 1
-                else:
-                    self.__timers[row][col] = 0
-            
-            input_data.set_input(row, col, input_value)
+        def set_input(row, col, val):
+            input_data.set_input(row, col, val)
 
-        self.__iterate_grid(current, check_on)
+        self.__iterate_grid(current, set_current)
 
-        if is_on[1][0]:
-            is_on[0][0] = False
-        if is_on[1][1]:
-            is_on[0][1] = False
-
-        self.__iterate_grid(is_on, debounce)
+        self.__iterate_grid(is_on, set_input)
