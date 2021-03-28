@@ -10,9 +10,11 @@ DEBOUNCE_TIME = 250
 
 class PressureSensorAdaptor(BaseInputAdaptor):
     """ Adapts inputs from pressure sensor """
-    def __init__(self):
+    def __init__(self, raw_inp=False):
         """ Creates new instance of PressureSensorAdaptor """
         super().__init__()
+        self.__thresholds = [[600, 500], [200, 300]]
+        self.__raw_inp = raw_inp
         self.__input_pins = []
         self.__output_pins = []
         self.__width = 0
@@ -106,23 +108,52 @@ class PressureSensorAdaptor(BaseInputAdaptor):
         self.__calibrate()
 
 
+
     def read(self, delta, input_data):
         current = self.__read_pressure()
         is_on = self.__initialize_grid(False)
 
-        def set_current(row, col, val):
-            current[row][col] = \
-                    round(current[row][col] - self.__ref_avg[row][col], 2)
-            print(round(current[row][col] - self.__ref_avg[row][col], 2))
-            # print("({},{}): {}, {}, {}, {}".format(row, col,
-            #      current[row][col],
-            #      self.__ref_avg[row][col],
-            #      is_on[row][col]))
-            # print('-----------')
+        if self.__raw_inp == False:
 
-        def set_input(row, col, val):
-            input_data.set_input(row, col, val)
+            def check_on(row, col, val):
+                current[row][col] -= self.__ref_avg[row][col]
+                is_on[row][col] = (current[row][col] > self.__thresholds[row][col])
 
-        self.__iterate_grid(current, set_current)
+            def debounce(row, col, val):
+                timer_value = self.__timers[row][col]
+                sensor_on = is_on[row][col]
+                input_value = 0
+                if timer_value == 0:
+                    if sensor_on:
+                        self.__timers[row][col] = utime.ticks_ms()
+                elif utime.ticks_diff(utime.ticks_ms(), timer_value) > DEBOUNCE_TIME:
+                    if sensor_on:
+                        input_value = 1
+                    else:
+                        self.__timers[row][col] = 0
 
-        self.__iterate_grid(is_on, set_input)
+                input_data.set_input(row, col, input_value)
+
+            self.__iterate_grid(current, check_on)
+
+            if is_on[1][0]:
+                is_on[0][0] = False
+            if is_on[1][1]:
+                is_on[0][1] = False
+
+            self.__iterate_grid(check_on, debounce)
+
+        if self.debounce != False:
+            def set_input(row, col, val):
+                val = round(val - self.__ref_avg[row][col], 2)
+                input_data.set_input(row, col, val)
+
+            self.__iterate_grid(current, set_input)
+
+
+
+
+
+
+
+
