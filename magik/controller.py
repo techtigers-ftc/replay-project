@@ -17,7 +17,7 @@ class Controller:
 
         self._display_adaptor = None
         self._game = None
-        self. _input_adaptor = None
+        self._input_adaptor = None
         self._frame_delay = 0
 
     def set_display_adaptor(self, display_adaptor):
