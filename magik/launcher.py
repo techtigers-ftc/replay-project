@@ -1,15 +1,17 @@
 from magik import Controller
 from magik import Game
-from magik.input_adaptors import DefaultAdaptor as InputAdaptor
+from magik.input_adaptors import RawAdaptor, DefaultAdaptor
 from magik.display_adaptors import DefaultAdaptor as DisplayAdaptor
 
-def launch_single_tile(sprites):
+def launch_single_tile(sprites, **kwargs):
     """ Launches a game on a single tile (8x8) mat that has (2x2) pressure
     sensors. The game is configured with default values, and initialized using
     the provided sprites.
 
     :param sprites: A collection of sprites to add to the game.
     :type sprites: Any array of sprites to add to the game.
+
+
     """
 
     # Initialize game object and configure it
@@ -23,7 +25,11 @@ def launch_single_tile(sprites):
 
     # Initialize the controller and adapters for input and output
     display_adaptor = DisplayAdaptor()
-    input_adaptor = InputAdaptor()
+    if 'input_adaptor_type' in kwargs and kwargs['input_adaptor_type'] == 'raw':
+        input_adaptor = RawAdaptor()
+    else:
+        input_adaptor = DefaultAdaptor()
+
     controller = Controller()
 
     # Configure the controller
