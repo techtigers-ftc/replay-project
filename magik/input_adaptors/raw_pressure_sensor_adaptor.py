@@ -8,10 +8,10 @@ AVAILABLE_INPUT_PIN_NUMBERS = [ 39, 32 ]
 MAX_REF_VALUES = 100
 
 class RawPressureSensorAdaptor(BaseInputAdaptor):
-    """ Adapts inputs from pressure sensor """
+    """ Adapts raw inputs from pressure sensor """
 
     def __init__(self):
-        """ Creates new instance of PressureSensorAdaptor """
+        """ Creates new instance of RawPressureSensorAdaptor """
         super().__init__()
         self.__input_pins = []
         self.__output_pins = []
@@ -100,6 +100,13 @@ class RawPressureSensorAdaptor(BaseInputAdaptor):
         self.__calibrate()
 
     def read(self, delta, input_data):
+        """ Returns the raw values of the pressure sensor
+
+        :param delta: no one uses it
+        :type delta: literaly no one uses it - Rishi
+        :param input_data: Reference to Input Data object
+        :type input_data:InputData
+        """
         current = self._read_pressure()
 
         def set_input(row, col, val):

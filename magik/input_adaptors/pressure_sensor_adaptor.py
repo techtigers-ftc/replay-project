@@ -28,6 +28,12 @@ class PressureSensorAdaptor(RawPressureSensorAdaptor):
 
 
     def read(self, delta, input_data):
+        """ Sets the input data to debounced input from the pressure senson
+
+        :param input_data: Reference to input data object
+        :type input_data: InputData
+        """
+
         current = self._read_pressure()
         is_on = self._initialize_grid(False)
 
