@@ -4,7 +4,11 @@ from games.whackamole.success import Success
 from games.whackamole.fail import Fail
 
 class Mole(Sprite):
+    """ Whackamole sprite class that allows the mole to move around and get whacked
+    """
     def __init__(self):
+        """ Innitializes the variables and params
+        """
         x = random.randint(0, 5)
         y = random.randint(0, 5)
         super().__init__(x, y)
@@ -32,6 +36,11 @@ class Mole(Sprite):
         self._state = None
 
     def update(self, input_data):
+        """ Is called every cycle and updates the position or state of the mole in game.
+
+        :param input_data: instance of input data class
+        :type input_data: InputData
+        """
         if not self.has_timer_expired(100):
             return
 
@@ -63,6 +72,12 @@ class Mole(Sprite):
 
 
     def draw(self, display_data):
+        """ Draws the updated sprite on the screen
+
+        :param display_data: Instance of the display data class
+        :type display_data: DisplayData
+        """
+
         deltas = self._display_states[self._display_state_index]
         color = self._colors[self._color_index]
 

@@ -13,7 +13,6 @@ class Quadrant(Sprite):
         c = input_data.get_input(1,0)
 
         d = input_data.get_input(1,1)
-        print(a,b,c,d)
 
         if self.has_timer_expired(100):
             red = (a-300)/10
