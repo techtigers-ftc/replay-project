@@ -49,10 +49,10 @@ class Mole(Sprite):
                             or input_data.get_input(0,1) == 1 \
                             or input_data.get_input(1,0) == 1 \
                             or input_data.get_input(1,1) == 1
-        print(input_data.get_input(0,0),
-                input_data.get_input(1,0),
-                input_data.get_input(0,1),
-                input_data.get_input(1,1))
+        # print(input_data.get_input(0,0),
+        #         input_data.get_input(1,0),
+        #         input_data.get_input(0,1),
+        #         input_data.get_input(1,1))
         if self._state is not None:
             if self._ticks > 5:
                 self._game.add_sprite(Mole())

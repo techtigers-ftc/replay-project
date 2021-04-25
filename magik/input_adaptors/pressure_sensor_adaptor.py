@@ -35,6 +35,9 @@ class PressureSensorAdaptor(RawPressureSensorAdaptor):
         """
 
         current = self._read_pressure()
+        print('-->', current[0][0], current[0][1], current [1][0], current[1][1])
+        # print('--|', self.__thresholds[0][0], self.__thresholds[0][1], self.__thresholds [1][0], self.__thresholds[1][1])
+        print('--=== ===---')
         is_on = self._initialize_grid(False)
 
 
