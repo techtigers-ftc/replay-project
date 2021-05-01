@@ -1,4 +1,4 @@
-from magik import launch_single_tile
+from magik import launch_module
 
 from games.football.hb import Halfback
 from games.football.qb import Quarterback
@@ -18,7 +18,7 @@ def play():
         DLine(5, 4)
     ]
 
-    launch_single_tile(sprites)
+    launch_module(sprites)
 
 if __name__ == "__main__":
     # File is called as a script, not import - start the game
