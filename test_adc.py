@@ -3,6 +3,8 @@ from time import sleep
 
 thresholds = (1400, 1100, 220, 220)
 #TODO: Figure out thresholds, test by screening
+thresholds = (200, 200, 200, 200)
+
 def read():
     
     for inp in inputs:

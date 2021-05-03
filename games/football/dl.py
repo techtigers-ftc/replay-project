@@ -1,4 +1,4 @@
-from player import Player
+from games.football.player import Player
 
 class DLine(Player):
     def __init__(self, x = 0, y = 0):

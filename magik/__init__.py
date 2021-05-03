@@ -8,3 +8,4 @@ from .input_data import InputData
 from .display_adaptors import BaseDisplayAdaptor
 from .game import Game
 from .sprite import Sprite
+from .launcher import *

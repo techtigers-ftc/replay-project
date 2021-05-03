@@ -1,103 +1,91 @@
 from .base_input_adaptor import BaseInputAdaptor
 from machine import Pin, ADC
+from utime import sleep
 #import time
 
-OUTPUT_PIN_NUMBERS = [ 13, 12, 14, 27 ]
-INPUT_PIN_NUMBERS = [ 39, 32 ]
+AVAILABLE_OUTPUT_PIN_NUMBERS = [ 13, 12, 14, 27 ]
+AVAILABLE_INPUT_PIN_NUMBERS = [ 39, 32 ]
+MAX_REF_VALUES = 10
 
 class PressureSensorAdaptor(BaseInputAdaptor):
+    """ Adapts inputs from pressure sensor """
     def __init__(self):
+        """ Creates new instance of PressureSensorAdaptor """
         super().__init__()
-
+        self.__input_pins = []
+        self.__output_pins = []
+        self.__ref_avg = []
+        self.__total_inputs = 0
+        self.__thresholds = (1400, 1100, 220, 220)
 
     def __calibrate(self):
-         for inp in inputs:
-        inp.atten(ADC.ATTN_0DB)
-      
-        ref_1 = read_pressure(outputs, inputs)
-        sleep(0.1)
-        ref_2 = read_pressure(outputs, inputs)
-        sleep(0.1)        
-        ref_3 = read_pressure(outputs, inputs)
-        sleep(0.1)
-        ref_4 = read_pressure(outputs, inputs)
-        sleep(0.1)        
-        ref_5 = read_pressure(outputs, inputs)
-        ref_avg = []
-        for sensor in range(0, 4):
-        ref_sum = int((ref_1[sensor] + ref_2[sensor] + ref_3[sensor] + ref_4[sensor] + ref_5[sensor])/5)
-        ref_avg.append(ref_sum)
-        while True:
-        current = read_pressure(outputs, inputs)
-        is_on = [ False, False, False, False ]
-        for index in range(len(current)):
-            current[index] -= ref_avg[index]
-            is_on[index] = (current[index] > thresholds[index])
-        
-        print(ref_avg)  
-        print(current) 
-        print(thresholds)
-        print(is_on)
-        print('-----')
+        """ Calibrates the pressure sensors with average reference values """
+        for inp in self.__input_pins:
+            inp.atten(ADC.ATTN_0DB)
+
+        ref_values = []
+        for index in range(MAX_REF_VALUES):
+            ref_values.append(self.__read_pressure())
+            sleep(0.1)
+
+        ref_sum = [ 0 ] * self.__total_inputs
+        for ref_value in ref_values:
+            for index in range(len(ref_value)):
+                ref_sum[index] += ref_value[index]
+
+        self.__ref_avg = []
+        for value in ref_sum:
+            self.__ref_avg.append(value/MAX_REF_VALUES)
 
     def __read_pressure(self):
+        """ Reads the pressure on the pressure sensors """
         result = []
 
-        for output_pin in self._output_pins:
+        for output_pin in self.__output_pins:
             output_pin.on()
-            for input_pin in self._input_pins:
+            for input_pin in self.__input_pins:
                 result.append(input_pin.read())
             output_pin.off()
 
         return result
 
-    
+
     def setup(self, input_data):
-        """Overiden from base class
+        """ Initialize input and output pins based on the size of the input, and
+        calibrate the input values.
+
+        :param input_data: Reference to input data object
+        :type input_data: InputData
         """
 
-        self._output_pins = []
-        self._input_pins = []
+        self.__output_pins = []
+        self.__input_pins = []
 
         for pin_index in range(input_data.width):
-            output_pin_number = OUTPUT_PIN_NUMBERS[pin_index]
+            output_pin_number = AVAILABLE_OUTPUT_PIN_NUMBERS[pin_index]
             pin = Pin(output_pin_number, Pin.OUT)
-            self._output_pins.append(pin)
-        
+            self.__output_pins.append(pin)
+
 
         for pin_index in range(input_data.height):
-            input_pin_numer  = INPUT_PIN_NUMBER[pin_index]
+            input_pin_number  = AVAILABLE_INPUT_PIN_NUMBERS[pin_index]
             pin = Pin(input_pin_number, Pin.IN)
             adc = ADC(pin)
-            self._input_pins.append(adc)
+            self.__input_pins.append(adc)
 
-    
+        self.__total_inputs = input_data.height * input_data.width
+        self.__calibrate()
+
 
     def read(self, delta, input_data):
-        pass
-        # if self.input_pin_1.read() < 4000:
+        current = self.__read_pressure()
+        is_on = [ False ] * len(current)
+        for index in range(len(current)):
+            current[index] -= self.__ref_avg[index]
+            is_on[index] = (current[index] > self.__thresholds[index])
 
-        #     input_data.set_input(0, 0, 1)
-
-        # if self.input_pin_2.read() < 4000:
-        #     input_data.set_input(1, 0, 1)
-
-        # if self.input_pin_3.read() < 4000:
-        #     input_data.set_input(2, 0, 1)
-
-        # if self.input_pin_4.read() < 4000:
-        #     input_data.set_input(3, 0, 1)
-
-        # if self.input_pin_5.read() < 4000:
-        #     input_data.set_input(0, 1, 1)
-
-        # if self.input_pin_6.read() < 4000:
-        #     input_data.set_input(1, 1, 1)
-
-        # if self.input_pin_7.read() < 4000:
-        #     input_data.set_input(2, 1, 1)
-
-        # if self.input_pin_8.read() < 4000:
-        #     input_data.set_input(3, 1, 1)
-               
-    
+        input_data.set_input(0, 0, is_on[0]) 
+        input_data.set_input(1, 0, is_on[1]) 
+        input_data.set_input(0, 1, is_on[2]) 
+        input_data.set_input(1, 1, is_on[3]) 
+        print(is_on)
