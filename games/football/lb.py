@@ -5,7 +5,7 @@ class Linebacker(Player):
         super().__init__(x, y)
         self._colors = [(32, 0, 0), (0, 32, 0), (0, 0, 32), (32, 32, 0), \
                 (32, 0, 32), (0, 32, 32), (32, 32, 32)]
-        self._color = self._colors[0]
+        self._color = self._colors[3]
         self._counter = 0
         self._movement = [(1, 0, 0), (1, 0, 0), (1, -1, 0)]
         self._carrier = False
@@ -25,7 +25,7 @@ class Linebacker(Player):
         if self._carrier:
             self._color = self._colors[6]
         else:
-            self._color = self._colors[0]
+            self._color = self._colors[3]
 
 
     def draw(self, display_data):

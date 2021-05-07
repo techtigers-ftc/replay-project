@@ -45,7 +45,7 @@ def explosion(length=512, time=10):
         np.write()
         utime.sleep_ms(time)
 
-    print("EXPLOSIONNNNNNNN")
+    print("EXPLOSIONNNNNNNN_no_raw")
 
 
 

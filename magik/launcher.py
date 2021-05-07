@@ -62,7 +62,7 @@ def launch_module(sprites, **input_adaptor_type):
 
     # Initialize game object and configure it
     game = Game()
-    game.set_display_dimensions(32, 16)
+    game.set_display_dimensions(16, 32)
     game.set_input_dimensions(4, 2)
 
     # Create a single space ship sprite and add it to the game
