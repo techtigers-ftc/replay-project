@@ -19,6 +19,3 @@ class Fail(Sprite):
             display_data.set_pixel(0,6 , (255,0,0))
             display_data.set_pixel(1,6 , (255,0,0))
             self.destroy()
-
-
-

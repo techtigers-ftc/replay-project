@@ -9,7 +9,7 @@ def play():
         Mole()
     ]
 
-    launch_single_tile(sprites)
+    launch_module(sprites)
 
 if __name__ == "__main__":
     # File is called as a script, not import - start the game
