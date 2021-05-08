@@ -63,7 +63,9 @@ class AsciiAdaptor(BaseDisplayAdaptor): # pylint:disable=too-few-public-methods
         :type display: Display
         """
 
-        lines = ['|'] * len(display_data.pixels)
+        # Display Data gives it to you in a 2-dimensional array in form x,y, and
+        # we want the number of lines, for which we need the y-coordinate
+        lines = ['|'] * len(display_data.pixels[0])
 
         for x_index in range(display_data.width):
             for y_index in range(display_data.height):
