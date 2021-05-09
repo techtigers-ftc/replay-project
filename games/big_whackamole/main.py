@@ -1,12 +1,13 @@
 from magik import launch_module
 
 from games.big_whackamole.mole import Mole
+from games.big_whackamole.score import Score
 
 def play():
     """Launches the game"""
 
     sprites = [
-        Mole()
+        Mole(Score())
     ]
 
     launch_module(sprites)

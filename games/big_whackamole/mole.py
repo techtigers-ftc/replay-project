@@ -36,7 +36,7 @@ class Mole(Sprite):
         self._state = None
         self._x_input_areas = [ (0, 6), (7, 13) ]
         self._y_input_areas = [ (0, 6), (7, 13), (14, 21) ]
-        self.score = score
+        self.__score = score
 
     def update(self, input_data):
         """ Is called every cycle and updates the position or state of the mole in game.
@@ -61,11 +61,13 @@ class Mole(Sprite):
             if break_loop:
                 break
                         
+        input_data.dump_input()
+        print('----')
         input_detected = input_data.get_input(input_area[0], input_area[1]) == 1\
 
         if self._state is not None:
             if self._ticks > 5:
-                self._game.add_sprite(Mole())
+                self._game.add_sprite(Mole(self.__score))
                 self.destroy()
         elif self._ticks >= 20:
             self._state= "FAIL"
@@ -74,7 +76,7 @@ class Mole(Sprite):
         elif input_detected:
             self._state = "SUCCESS"
             self._ticks = 0
-            self.score.add(1)
+            self.__score.add(1)
 
         else:
             self._color_index = (self._color_index + 1) % len(self._colors)

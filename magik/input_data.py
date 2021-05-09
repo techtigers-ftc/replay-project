@@ -16,9 +16,9 @@ class InputData:
         self._inputs = []
         self._reference = []
 
-        for _ in range(self._height):
-            self._inputs.append([0] * self._width)
-            self._reference.append([0] * self._width)
+        for _ in range(self._width):
+            self._inputs.append([0] * self._height)
+            self._reference.append([0] * self._height)
 
     def clear(self):
         """ Clears reference input values

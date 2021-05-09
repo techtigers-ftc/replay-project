@@ -15,3 +15,10 @@ elif sys.platform == "win32":
     from .win_keyboard_adaptor import WinKeyboardAdaptor as RawAdaptor
 else:
     from .keyboard_adaptor import KeyboardAdaptor as RawAdaptor
+
+if sys.platform == "esp32":
+    from .pressure_sensor_adaptor2 import PressureSensorAdaptor2 as RawAdaptor2
+elif sys.platform == "win32":
+    from .win_keyboard_adaptor import WinKeyboardAdaptor as RawAdaptor2
+else:
+    from .keyboard_adaptor import KeyboardAdaptor as RawAdaptor2
