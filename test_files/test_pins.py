@@ -1,13 +1,19 @@
 from machine import Pin, ADC
 import utime
 
-adc_pins = [ 36, 39, 34, 35, 32, 33]
-new_adc_pins = [ 33, 32, 35]
+ADC_PIN_NUMBERS = [
+    33, # (0, 0)
+    35, # (0, 1)
+    34, # (0, 2)
+    32, # (1, 0)
+    36, # (1, 1)
+    39  # (1, 2)
+]
 adcs = []
 def init():
-    global adc_pins
+    global ADC_PIN_NUMBERS
     global adcs
-    for pin in adc_pins:
+    for pin in ADC_PIN_NUMBERS:
         print(pin)
         adc = ADC(Pin(pin))
         adc.atten(ADC.ATTN_11DB)
