@@ -48,18 +48,13 @@ class Mole(Sprite):
             return
 
         self._ticks += 1
-        
-        # input_area = 0
-        # break_loop = False
-        # for y_input_area in self._y_input_areas:
-        #     if self.y >= y_input_area[0] <= y_input_area[1]:
-        #         for x_input_area in self._x_input_areas:
-        #             if self.x >= x_input_area[0] <= x_input_area[1]:
-        #                 input_area = (self._x_input_areas.index(x_input_area), 
-        #                         self._y_input_areas.index(y_input_area))
-        #                 break_loop = True
-        #     if break_loop:
-        #         break
+        input_area = 0
+        for x_coord in range(input_data.width):
+            for y_coord in range(input_data.height):
+                if self.x > x_coord * 8 and self.x < (x_coord + 1) * 8:
+                    if self.y > y_coord * 8 and self.y < (y_coord + 1) * 8:
+                        input_area = input_data.get_input(x_coord, y_coord)
+
                         
         # input_data.dump_input()
         print('----')
@@ -70,12 +65,12 @@ class Mole(Sprite):
         # print(input_data.get_input(1,1))
         # print(input_data.get_input(1,2))
 
-        a = input_data.get_input(0,0)
-        b = input_data.get_input(0,1)
-        c = input_data.get_input(0,2)
-        d = input_data.get_input(1,0)
-        e = input_data.get_input(1,1)
-        f = input_data.get_input(1,2)
+        # a = input_data.get_input(0,0)
+        # b = input_data.get_input(0,1)
+        # c = input_data.get_input(0,2)
+        # d = input_data.get_input(1,0)
+        # e = input_data.get_input(1,1)
+        # f = input_data.get_input(1,2)
 
 
         if self._state is not None:
@@ -86,7 +81,7 @@ class Mole(Sprite):
             self._state= "FAIL"
             self._ticks = 0
             
-        elif a>400 or b>600 or c>400 or d>400 or e>400 or f>400:
+        elif input_area > 100:
             self._state = "SUCCESS"
             self._ticks = 0
             self.__score.add(1)

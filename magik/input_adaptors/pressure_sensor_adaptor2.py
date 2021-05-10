@@ -109,9 +109,9 @@ class PressureSensorAdaptor2(BaseInputAdaptor):
         def set_input(x_coord, y_coord, val):
             print('Setting', x_coord, y_coord, val, 
                     self._ref_avg[x_coord][y_coord])
-            # val = round(val - self._ref_avg[x_coord][y_coord], 2)
-            val = round(val - 2900, 2)
-            print(val)
+            val = round(val - self._ref_avg[x_coord][y_coord], 2)
+            # val = round(val - 2900, 2)
+            # print(val)
             input_data.set_input(x_coord, y_coord, val)
 
         self._iterate_grid(current, set_input)
