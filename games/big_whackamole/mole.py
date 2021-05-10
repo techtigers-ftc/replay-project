@@ -49,21 +49,34 @@ class Mole(Sprite):
 
         self._ticks += 1
         
-        input_area = 0
-        break_loop = False
-        for y_input_area in self._y_input_areas:
-            if self.y >= y_input_area[0] <= y_input_area[1]:
-                for x_input_area in self._x_input_areas:
-                    if self.x >= x_input_area[0] <= x_input_area[1]:
-                        input_area = (self._x_input_areas.index(x_input_area), 
-                                self._y_input_areas.index(y_input_area))
-                        break_loop = True
-            if break_loop:
-                break
+        # input_area = 0
+        # break_loop = False
+        # for y_input_area in self._y_input_areas:
+        #     if self.y >= y_input_area[0] <= y_input_area[1]:
+        #         for x_input_area in self._x_input_areas:
+        #             if self.x >= x_input_area[0] <= x_input_area[1]:
+        #                 input_area = (self._x_input_areas.index(x_input_area), 
+        #                         self._y_input_areas.index(y_input_area))
+        #                 break_loop = True
+        #     if break_loop:
+        #         break
                         
-        input_data.dump_input()
+        # input_data.dump_input()
         print('----')
-        input_detected = input_data.get_input(input_area[0], input_area[1]) == 1\
+        # print(input_data.get_input(0,0))
+        # print(input_data.get_input(0,1))
+        # print(input_data.get_input(0,2))
+        # print(input_data.get_input(1,0))
+        # print(input_data.get_input(1,1))
+        # print(input_data.get_input(1,2))
+
+        a = input_data.get_input(0,0)
+        b = input_data.get_input(0,1)
+        c = input_data.get_input(0,2)
+        d = input_data.get_input(1,0)
+        e = input_data.get_input(1,1)
+        f = input_data.get_input(1,2)
+
 
         if self._state is not None:
             if self._ticks > 5:
@@ -73,11 +86,10 @@ class Mole(Sprite):
             self._state= "FAIL"
             self._ticks = 0
             
-        elif input_detected:
+        elif a>400 or b>600 or c>400 or d>400 or e>400 or f>400:
             self._state = "SUCCESS"
             self._ticks = 0
             self.__score.add(1)
-
         else:
             self._color_index = (self._color_index + 1) % len(self._colors)
             self._display_state_index = (self._display_state_index + 1) % \
@@ -95,6 +107,7 @@ class Mole(Sprite):
         color = self._colors[self._color_index]
 
         if self._state == "SUCCESS":
+            print("bruh")
             color = (0,255,0)
         elif self._state == "FAIL":
             color = (255,0,0)
