@@ -1,6 +1,6 @@
 from magik import Controller
 from magik import Game
-from magik.input_adaptors import RawAdaptor, DefaultAdaptor
+from magik.input_adaptors import RawAdaptor, DefaultAdaptor, RawAdaptor2
 from magik.display_adaptors import DefaultAdaptor as DisplayAdaptor
 
 def launch_single_tile(sprites, **input_adaptor_type):
@@ -63,7 +63,7 @@ def launch_module(sprites, **input_adaptor_type):
     # Initialize game object and configure it
     game = Game()
     game.set_display_dimensions(16, 32)
-    game.set_input_dimensions(4, 2)
+    game.set_input_dimensions(2, 3)
 
     # Create a single space ship sprite and add it to the game
     for sprite in sprites:
@@ -71,10 +71,7 @@ def launch_module(sprites, **input_adaptor_type):
 
     # Initialize the controller and adapters for input and output
     display_adaptor = DisplayAdaptor()
-    if 'input_adaptor_type' in input_adaptor_type and input_adaptor_type['input_adaptor_type'] == 'raw':
-        input_adaptor = RawAdaptor()
-    else:
-        input_adaptor = DefaultAdaptor()
+    input_adaptor = RawAdaptor2()
 
     controller = Controller()
 

@@ -3,38 +3,43 @@ from machine import Pin, ADC
 import utime
 #import time
 
-AVAILABLE_OUTPUT_PIN_NUMBERS = [ 13, 12, 14, 27 ]
-AVAILABLE_INPUT_PIN_NUMBERS = [ 39, 32 ]
+ADC_PIN_NUMBERS = [
+    33, # (0, 0)
+    35, # (0, 1)
+    34, # (0, 2)
+    32, # (1, 0)
+    36, # (1, 1)
+    39  # (1, 2)
+]
 MAX_REF_VALUES = 100
 
-class RawPressureSensorAdaptor(BaseInputAdaptor):
+class PressureSensorAdaptor2(BaseInputAdaptor):
     """ Adapts raw inputs from pressure sensor """
 
     def __init__(self):
         """ Creates new instance of RawPressureSensorAdaptor """
         super().__init__()
         self.__input_pins = []
-        self.__output_pins = []
         self.__width = 0
         self.__height = 0
         self._ref_avg = [[]]
     
     def _initialize_grid(self, initial_value = 0):
         grid = []
-        for index in range(self.__height):
-            grid.append([initial_value] * self.__width)
+        for index in range(self.__width):
+            grid.append([initial_value] * self.__height)
         return grid
 
     def _iterate_grid(self, grid, action):
-        for row_index in range(self.__height):
-            for col_index in range(self.__width):
-                action(row_index, col_index, grid[row_index][col_index])
+        for x_coord in range(self.__width):
+            for y_coord in range(self.__height):
+                action(x_coord, y_coord, grid[x_coord][y_coord])
 
 
     def __calibrate(self):
         """ Calibrates the pressure sensors with average reference values """
         for inp in self.__input_pins:
-            inp.atten(ADC.ATTN_0DB)
+            inp.atten(ADC.ATTN_11DB)
 
         # Capture multiple raw readings
         ref_values = []
@@ -43,8 +48,8 @@ class RawPressureSensorAdaptor(BaseInputAdaptor):
             utime.sleep(0.01)
 
         # Calculate sum of raw readings
-        def add_refs(row,col,val):
-            ref_sum[row][col] +=val
+        def add_refs(x_coord, y_coord, val):
+            ref_sum[x_coord][y_coord] +=val
 
         ref_sum = self._initialize_grid()
         for ref_value in ref_values:
@@ -61,16 +66,16 @@ class RawPressureSensorAdaptor(BaseInputAdaptor):
         """ Reads the pressure on the pressure sensors """
         result = []
 
-        for output_pin in self.__output_pins:
-            output_pin.on()
-            row = []
-            for input_pin in self.__input_pins:
-                row.append(input_pin.read())
-            output_pin.off()
-            result.append(row)
+        pin_index = 0
+        for x_coord in range(self.__width):
+            column = []
+            for y_coord in range(self.__height):
+                input_pin = self.__input_pins[pin_index]
+                column.append(input_pin.read())
+                pin_index += 1
+            result.append(column)
 
         return result
-
 
     def setup(self, input_data):
         """ Initialize input and output pins based on the size of the input, and
@@ -80,20 +85,12 @@ class RawPressureSensorAdaptor(BaseInputAdaptor):
         :type input_data: InputData
         """
 
-        self.__output_pins = []
         self.__input_pins = []
         self.__width = input_data.width
         self.__height = input_data.height
 
-        for pin_index in range(self.__height):
-            output_pin_number = AVAILABLE_OUTPUT_PIN_NUMBERS[pin_index]
-            pin = Pin(output_pin_number, Pin.OUT)
-            self.__output_pins.append(pin)
-
-
-        for pin_index in range(self.__width):
-            input_pin_number  = AVAILABLE_INPUT_PIN_NUMBERS[pin_index]
-            pin = Pin(input_pin_number, Pin.IN)
+        for pin_number in ADC_PIN_NUMBERS:
+            pin = Pin(pin_number, Pin.IN)
             adc = ADC(pin)
             self.__input_pins.append(adc)
 
@@ -109,8 +106,12 @@ class RawPressureSensorAdaptor(BaseInputAdaptor):
         """
         current = self._read_pressure()
 
-        def set_input(row, col, val):
-            val = round(val - self._ref_avg[row][col], 2)
-            input_data.set_input(row, col, val)
+        def set_input(x_coord, y_coord, val):
+            print('Setting', x_coord, y_coord, val, 
+                    self._ref_avg[x_coord][y_coord])
+            val = round(val - self._ref_avg[x_coord][y_coord], 2)
+            # val = round(val - 2900, 2)
+            # print(val)
+            input_data.set_input(x_coord, y_coord, val)
 
         self._iterate_grid(current, set_input)

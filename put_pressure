@@ -1,3 +1,0 @@
-ampy -p ${PORT} rm magik/input_adaptors/pressure_sensor_adaptor.py
-ampy -p ${PORT} put magik/input_adaptors/pressure_sensor_adaptor.py magik/input_adaptors/pressure_sensor_adaptor.py
-screen ${PORT} 115200

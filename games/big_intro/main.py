@@ -1,15 +1,14 @@
 from magik import launch_module
 
-from games.big_whackamole.mole import Mole
-from games.big_whackamole.score import Score
+from games.big_intro.box import Box
 
 def play():
-    """Launches the game"""
+    """ Launches the game """
 
     sprites = [
-        Mole(Score())
+        Box(7, 15, 0, 0)
     ]
-
+    
     launch_module(sprites)
 
 if __name__ == "__main__":
