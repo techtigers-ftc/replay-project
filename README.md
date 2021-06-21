@@ -50,24 +50,34 @@ https://github.com/techtigers-fll/replay-project
 
 # Usage
 
-When you clone you will see 2 main folders, magik, games
+When you clone you will see 2 main folders, magik and games
 
-Magik is our sdk and games has games that we have written.
+Magik is our sdk and Games has games that we have written.
 
-If you want to write a game you can.
-Creat main init and a sprite.
+To write a game, you can copy a pre-existing game (See the examples below). Keep these points in mind:
 
-Inside the sprite, create an update and draw function.
+**main.py**
+1. Make sure the first import is importing `launch_module`, and not `launch_single_tile`
+2. Make sure to adapt the sprite import line and sprites array to your sprites and directories
+3. To run the program, write `python3 main.py` in the directory
 
-For examples look in the examples.
+**Sprite programs**
+1. Change the code in the update section to change the sprite's properties, and the draw section to change how it draws
+2. Don't keep any unnecessary sprites in the directory
+3. Check the sprites import statements to make sure you are not importing deleted sprites
+
+Any questions can be emailed to techtigers33958@gmail.com
+
+After completing a game, please submit a pull request so we can try it out on our actual mat! 
+
 ## Examples
 
-- [demo](https://github.com/techtigers-fll/replay-project/tree/master/games/demo)
-- [intro](https://github.com/techtigers-fll/replay-project/tree/master/games/intro)
+- [big_intro](https://github.com/techtigers-fll/replay-project/tree/master/games/big_intro)
+- [big_whackamole](https://github.com/techtigers-fll/replay-project/tree/master/games/big_whackamole)
 - [football](https://github.com/techtigers-fll/replay-project/tree/master/games/football)
-- [quadrant](https://github.com/techtigers-fll/replay-project/tree/master/games/quadrant)
+- [plank](https://github.com/techtigers-fll/replay-project/tree/master/games/plank)
 
-
+ **NOTE**: Some of our programs were originally built for our smaller mat, like `intro` and `whackamole`. We now have a larger scaled mat that is being used. Due to this, some of out programs have an import statement with `launch_single_tile`, which should not be used anymore, and newer versions of the old programs are named with a *big* prefix, like `big_intro` and `big_whackamole`.
 
 
 
