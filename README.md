@@ -1,6 +1,6 @@
 # Magik SDK
 
-_SDK that will allow you to write a game for the [Tech Tigers](https://www.techtigers.team/home Magic Carpet game mat._
+_SDK that will allow you to write a game for the [Tech Tigers](https://www.techtigers.team/home) Magic Carpet game mat._
 # Introduction
 This was developed by the Tech Tigers FLL team as part of the Innovation Project for the 2020-2021 season -  Replay. As part of our competiton we had identify and popose an innovative solution. We chose the problem of there not being enough fun ways to stay active at home.
 
