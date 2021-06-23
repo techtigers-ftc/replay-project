@@ -43,16 +43,11 @@ It is very similar to the output, our game sets the pixels in a standard format 
 - Ascii
 - LEDs on mat
 
-# Installation
-
-Clone 
-https://github.com/techtigers-fll/replay-project
-
 # Usage
 
-When you clone you will see 2 main folders, magik and games
+Please fork our repository before making changes. After you fork, you will see 2 main folders, `magik` and `games`
 
-Magik is our sdk and Games has games that we have written.
+`magik` is our sdk and `games` has games that we have written.
 
 To write a game, you can copy a pre-existing game (See the examples below). Keep these points in mind:
 
@@ -66,9 +61,14 @@ To write a game, you can copy a pre-existing game (See the examples below). Keep
 2. Don't keep any unnecessary sprites in the directory
 3. Check the sprites import statements to make sure you are not importing deleted sprites
 
-Any questions can be emailed to techtigers33958@gmail.com
 
-After completing a game, please submit a pull request so we can try it out on our actual mat! 
+You can check [sprite.py](https://github.com/techtigers-fll/replay-project/blob/master/magik/sprite.py) for information on how to use the properties of the sprite.
+
+Do not change the code in any of the existing code, espicially in the `magik` directory, as it will cause the code to not work.
+
+After completing a game, please share your repository with us so we can try it out on our actual mat!
+
+Any questions can be can be asked on our [discord server](), or emailed to techtigers33958@gmail.com
 
 ## Examples
 
