@@ -79,5 +79,7 @@ After completing a game, please submit a pull request so we can try it out on ou
 
  **NOTE**: Some of our programs were originally built for our smaller mat, like `intro` and `whackamole`. We now have a larger scaled mat that is being used. Due to this, some of out programs have an import statement with `launch_single_tile`, which should not be used anymore, and newer versions of the old programs are named with a *big* prefix, like `big_intro` and `big_whackamole`.
 
+## Testing Pull Requests
 
+I've made some changes to this doc.
 
