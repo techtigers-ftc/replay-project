@@ -68,7 +68,7 @@ Do not change the code in any of the existing code, espicially in the `magik` di
 
 After completing a game, please share your repository with us so we can try it out on our actual mat!
 
-Any questions can be can be asked on our [discord server](), or emailed to techtigers33958@gmail.com
+Any questions can be can be asked on our [discord server](https://discord.gg/2ak6YbZjVR), or emailed to techtigers33958@gmail.com
 
 ## Examples
 
